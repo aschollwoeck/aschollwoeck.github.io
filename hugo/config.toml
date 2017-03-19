@@ -5,3 +5,4 @@ theme= "hyde"
 
 [params]
     disqusShortname = "spf13"
+    description = "Blogging about all kind of thoughts and mainly for C# programming language."
