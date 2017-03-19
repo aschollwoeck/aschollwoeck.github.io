@@ -4,4 +4,4 @@ languageCode = "en-us"
 theme= "hyde"
 
 [params]
-    disqusShortname="spf13"
+    disqusShortname = "spf13"
