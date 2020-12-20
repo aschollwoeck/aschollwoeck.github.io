@@ -1,6 +1,6 @@
 ---
 title: "Triangles with Rust - how fast ?"
-date: 2020-12-23
+date: 2020-12-20
 draft: false
 tags: ["programming", "rust"]
 showToc: true

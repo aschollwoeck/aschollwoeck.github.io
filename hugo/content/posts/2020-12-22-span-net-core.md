@@ -1,6 +1,6 @@
 ---
 title: "Span... how and when does it work ? (.NET Core)"
-date: 2020-12-22
+date: 2020-12-20
 draft: false
 tags: ["programming", ".net core"]
 showToc: true

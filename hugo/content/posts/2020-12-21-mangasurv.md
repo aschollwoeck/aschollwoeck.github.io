@@ -1,6 +1,6 @@
 ---
 title: "MangaSurv - Check for updates"
-date: 2020-12-21
+date: 2020-12-20
 draft: false
 tags: ["programming", ".net core"]
 showToc: true

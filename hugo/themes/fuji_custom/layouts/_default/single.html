@@ -5,13 +5,13 @@
         <!-- <a href="{{ .Permalink }}">{{ .Title }}</a> -->
         {{ .Title }}
     </h2>
-    <div class="post-item post-meta">
+    <!-- <div class="post-item post-meta">
         {{ partial "post-meta.html" . }}
-    </div>
+    </div> -->
     {{ with .Params.player }}
     <div id="post-aplayer"></div>
     {{ end }}
-    
+
     <!-- post main content -->
     <div class="post-content markdown-body">
         {{ .Content }}

@@ -1,6 +1,6 @@
 ---
 title: "MangaSurv"
-date: 2020-12-23
+date: 2020-12-20
 draft: false
 tags: ["programming", ".net core", "hobby"]
 showToc: true
