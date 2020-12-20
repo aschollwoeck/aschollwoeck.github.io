@@ -5,7 +5,9 @@
         <!-- <a href="{{ .Permalink }}">{{ .Title }}</a> -->
         {{ .Title }}
     </h2>
-    
+    <div class="post-item post-meta">
+        {{ partial "post-meta.html" . }}
+    </div>
     {{ with .Params.player }}
     <div id="post-aplayer"></div>
     {{ end }}
