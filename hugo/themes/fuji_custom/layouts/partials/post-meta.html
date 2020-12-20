@@ -1,0 +1,25 @@
+<span>
+    <!-- <i class="fas fa-calendar-alt"></i>&nbsp;{{ .Date.Format "2006-01-02" }} -->
+    <i class="fas fa-calendar-alt"></i>&nbsp;{{ .Date.Format "Jan 2, 2006" }}    
+</span>
+{{ if .Site.Params.showWordCounter }}
+    <span>
+        <i class="fas fa-inbox"></i>&nbsp;{{ i18n "postMetaWordCount" .WordCount}}
+    </span>
+{{ end }}
+{{ if .Site.Params.showReadTime }}
+    <span>
+        <i class="far fa-clock"></i>&nbsp;{{ i18n "postMetaReadingTime" .ReadingTime }}
+    </span>
+{{ end }}
+<span>
+    <i class="fas fa-tags"></i>
+    {{ if .Params.tags }}
+        <!-- <b>Tags:</b> -->
+        {{ range .Params.tags }}
+            <a href="{{ "/tags/" | relURL }}{{ . | urlize}}">{{ . }}</a>&nbsp;
+        {{ end }}
+    {{ else }}
+        {{ i18n "postMetaNoTag" }}
+    {{ end }}
+</span>

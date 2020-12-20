@@ -1,0 +1,137 @@
+/* .header {
+    background-color: rgb(81, 15, 109);
+    color: #fff;
+} */
+
+.header {
+    color: #222;
+    border: solid #ddd;
+    border-width: 0 0 1px 0;
+}
+
+.title {
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+    display: inline;
+}
+
+.title-main, .title-main:hover {
+    /* color: #fff; */
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 3rem;
+    letter-spacing: 0rem;
+}
+
+.title-nav {
+    padding-top: 0.75rem;
+    text-align: right;
+    list-style-type: none;
+    float: right;
+}
+
+
+.title-nav > li {
+    display: inline;
+    margin-left: 2rem;
+}
+
+.title-main-nav {
+    /* color: #fff; */
+    color: #222;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+main {
+    margin-top: 2rem;
+}
+
+
+.content {
+    margin-left: 0;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    display: none;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+    .content {
+        width: 74.0%;
+        margin-left: 4%;
+    }
+    
+    .sidebar {
+        width: 22%;
+        display: block;
+    }
+}
+
+.footer {
+    display: none;
+}
+
+@media(max-width: 549px) {
+    .footer {
+        display: block;
+    }
+}
+
+.sidebar-item {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: dotted #ddd;
+    border-width: 1px 0 0 0;
+}
+
+.sidebar-item > * {
+    margin-bottom: 0;
+}
+
+.avatar {
+    border-radius: 6px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.social {
+    text-align: center;
+}
+
+.social > a {
+    font-size: 25px;
+    margin-right: 5px;
+    color: #222;
+    text-decoration: none;
+}
+
+#TableOfContents ul {
+    list-style-type: none;
+}
+
+.post {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border: solid #ddd;
+    border-width: 0 0 1px 0;
+}
+
+.pagination {
+    list-style-type: none;
+    display: inline;
+    font-size: 2rem;
+}
+
+.pagination > li {
+    display: inline;
+    margin-right: 1rem;
+}
