@@ -44,6 +44,11 @@
     font-size: 2rem;
 }
 
+.title-main-nav:hover {
+    border: solid #222;
+    border-width: 0 0 2px 0;
+}
+
 main {
     margin-top: 2rem;
 }

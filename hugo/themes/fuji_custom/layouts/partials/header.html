@@ -1,29 +1,31 @@
 <header>
-    <div class="header container">
-        <div class="twelve columns">
-            <h1 class="title">
-                <a class="title-main" href="/">{{ .Site.Title }}</a>
-            </h1>
-            {{ with .Site.Params.subTitle }}
-            <span class="title-sub">{{ . }}</span>
-            {{ end }}
-        <!-- </div>
-        <div class="three columns"> -->
-            <ul class="title title-nav">
-                <!-- <li>
-                    <a class="title-main-nav" href="/index.xml">
-                        <i class="fas fa-rss"></i> RSS</a>
-                </li> -->
-                <li>
-                    <a class="title-main-nav" href="/">Blog</a>
-                </li>
-                <li>
-                    <a class="title-main-nav" href="/projects">Projects</a>
-                </li>
-                <li>
-                    <a class="title-main-nav" href="/about">About</a>
-                </li>
-            </ul>
+    <nav>
+        <div class="header container">
+            <div class="twelve columns">
+                <h1 class="title">
+                    <a class="title-main" href="/">{{ .Site.Title }}</a>
+                </h1>
+                {{ with .Site.Params.subTitle }}
+                <span class="title-sub">{{ . }}</span>
+                {{ end }}
+            <!-- </div>
+            <div class="three columns"> -->
+                <ul class="title title-nav">
+                    <!-- <li>
+                        <a class="title-main-nav" href="/index.xml">
+                            <i class="fas fa-rss"></i> RSS</a>
+                    </li> -->
+                    <li>
+                        <a class="title-main-nav" href="/">Blog</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 </header>
