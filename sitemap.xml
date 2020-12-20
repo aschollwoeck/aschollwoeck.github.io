@@ -3,52 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://schollwoeck.de/</loc>
+    <loc>/</loc>
     <lastmod>2020-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/posts/2020-12-20-konditionssimulation/</loc>
+    <loc>/posts/2020-12-20-konditionssimulation/</loc>
     <lastmod>2020-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/posts/</loc>
+    <loc>/posts/</loc>
     <lastmod>2020-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/tags/programming/</loc>
+    <loc>/tags/programming/</loc>
     <lastmod>2020-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/tags/work/</loc>
+    <loc>/tags/work/</loc>
     <lastmod>2020-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/posts/2020-12-19-mehrwertsteuer-2/</loc>
+    <loc>/posts/2020-12-19-mehrwertsteuer-2/</loc>
     <lastmod>2020-12-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2020-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/tags/blog/</loc>
+    <loc>/tags/blog/</loc>
     <lastmod>2020-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/posts/2020-12-18-setting-up-blog/</loc>
+    <loc>/posts/2020-12-18-setting-up-blog/</loc>
     <lastmod>2020-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://schollwoeck.de/search/</loc>
+    <loc>/search/</loc>
   </url>
   
 </urlset>
