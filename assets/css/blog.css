@@ -16,12 +16,25 @@
 }
 
 .title-main, .title-main:hover {
-    /* color: #fff; */
     color: #222;
     text-decoration: none;
     font-weight: 600;
-    font-size: 3rem;
-    letter-spacing: 0rem;
+    font-size: 2.7rem;
+    /* letter-spacing: 0rem; */
+    padding: 2px 5px;
+}
+
+.title-main:hover {
+    color: #222;
+    border: solid #222;
+    border-width: 0 0 2px 0;
+}
+
+.title-main:active {
+    color: #eee;
+    border: solid #0FA0CE;
+    border-width: 0 0 3px 0;
+    background-color: #222;
 }
 
 .title-nav {
@@ -34,25 +47,53 @@
 
 .title-nav > li {
     display: inline;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
 }
 
 .title-main-nav {
-    /* color: #fff; */
     color: #222;
     text-decoration: none;
     font-size: 2rem;
+    padding: 2px 5px;
 }
 
 .title-main-nav:hover {
+    color: #222;
     border: solid #222;
     border-width: 0 0 2px 0;
+}
+
+.title-main-nav:active {
+    text-decoration: none;
+    color: #eee;
+    border: solid #0FA0CE;
+    border-width: 0 0 3px 0;
+    background-color: #222;
+}
+
+.post-title a {
+    text-decoration: none;
+    color: #1EAEDB; 
+}
+
+.post-title a:hover {
+    /* text-decoration: underline; */
+    color: #0FA0CE; 
+    border: solid #0FA0CE;
+    border-width: 0 0 2px 0;
+}
+
+.post-title a:active {
+    /* text-decoration: none; */
+    color: #eee;
+    /* border: solid #222; */
+    /* border-width: 0 0 3px 0; */
+    background-color: #0FA0CE;
 }
 
 main {
     margin-top: 2rem;
 }
-
 
 .content {
     margin-left: 0;
@@ -130,6 +171,12 @@ main {
     border-width: 0 0 1px 0;
 }
 
+.post-title {
+    font-size: 2.2rem;
+    /* line-height: 1.25; */
+    font-weight: bold;
+}
+
 .pagination {
     list-style-type: none;
     display: inline;
@@ -139,4 +186,50 @@ main {
 .pagination > li {
     display: inline;
     margin-right: 1rem;
+}
+
+/* Auto Numbering */
+body {counter-reset: h2}
+h2 {counter-reset: h3}
+h3 {counter-reset: h4}
+h4 {counter-reset: h5}
+h5 {counter-reset: h6}
+h6 {counter-reset: h7}
+article {counter-reset: figcaption;}
+
+article[autonumbering] h2:before {counter-increment: h2; content: counter(h2) " "}
+article[autonumbering] h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) " "}
+article[autonumbering] h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) " "}
+article[autonumbering] h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "}
+article[autonumbering] h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) " "}
+
+article[autonumbering] #TableOfContents ul { counter-reset: item }
+article[autonumbering] #TableOfContents li a:before { content: counters(item, ".") ". "; counter-increment: item }
+
+article img {
+    max-width: 100%;
+}
+
+article p {
+    text-align: justify;
+}
+
+article table {
+    width: 100%;
+}
+
+figcaption::before {counter-increment: figcaption; content: "Abbildung " counter(figcaption) ": "}
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 80%;
+    margin: 5px 0 5px 0;
+    padding-left: 5px;
+}
+
+thead {
+    background-color: #eee;
 }

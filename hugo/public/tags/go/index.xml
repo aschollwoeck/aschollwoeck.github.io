@@ -6,15 +6,16 @@
     <description>Recent content in go on A. Schollwöck&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JPP Boosted</title>
       <link>/projects/jpp-boosted/</link>
-      <pubDate>Sun, 20 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 12 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/projects/jpp-boosted/</guid>
-      <description>Concept
-Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</description>
+      <description>Versionsverwaltung    Versionsnr. Grund der Änderung Geändert am       1 Initiale Erstellung 2019-06-12      
+Einleitung In diesem Abschnitt werden die Umstände und Motivation des Projektes dargestellt.
+Ausgangssituation Der Tuner Jean-Pierre Kraemer betreibt die Tuningwerkstatt „JP Performance“ und modifiziert dort hauptsächlich Autos.</description>
     </item>
     
   </channel>

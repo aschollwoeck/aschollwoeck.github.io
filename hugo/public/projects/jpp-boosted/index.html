@@ -34,20 +34,22 @@
 <meta name="keywords" content="programming, go, hobby" />
 
 <meta property="og:title" content="JPP Boosted" />
-<meta property="og:description" content="Concept
-Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." />
+<meta property="og:description" content="Versionsverwaltung    Versionsnr. Grund der Änderung Geändert am       1 Initiale Erstellung 2019-06-12      
+Einleitung In diesem Abschnitt werden die Umstände und Motivation des Projektes dargestellt.
+Ausgangssituation Der Tuner Jean-Pierre Kraemer betreibt die Tuningwerkstatt „JP Performance“ und modifiziert dort hauptsächlich Autos." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/projects/jpp-boosted/" />
 <meta property="og:image" content="/img/avatar.jpg"/>
-<meta property="article:published_time" content="2020-12-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-20T00:00:00+00:00" />
+<meta property="article:published_time" content="2019-06-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-06-12T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/img/avatar.jpg"/>
 
 <meta name="twitter:title" content="JPP Boosted"/>
-<meta name="twitter:description" content="Concept
-Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."/>
+<meta name="twitter:description" content="Versionsverwaltung    Versionsnr. Grund der Änderung Geändert am       1 Initiale Erstellung 2019-06-12      
+Einleitung In diesem Abschnitt werden die Umstände und Motivation des Projektes dargestellt.
+Ausgangssituation Der Tuner Jean-Pierre Kraemer betreibt die Tuningwerkstatt „JP Performance“ und modifiziert dort hauptsächlich Autos."/>
 
 
 <link rel="stylesheet" href="/assets/css/normalize.css" />
@@ -165,7 +167,7 @@ Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eir
     
         <div class="copyright">
             
-            <span>&copy; 2020, A. Schollwöck
+            <span>&copy; 2021, A. Schollwöck
             </span>
         </div>
     </div>
@@ -182,25 +184,25 @@ Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eir
             
             <div class="content">
                 
-<article>
+<article autonumbering>
     
-    <h2 class="post-item post-title">
+    <div class="post-item post-title">
         
         JPP Boosted
-    </h2>
+    </div>
     <div class="post-item post-meta">
         <span>
     
-    <i class="fas fa-calendar-alt"></i>&nbsp;Dec 20, 2020    
+    <i class="fas fa-calendar-alt"></i>&nbsp;Jun 12, 2019    
 </span>
 
     <span>
-        <i class="fas fa-inbox"></i>&nbsp;102 words
+        <i class="fas fa-inbox"></i>&nbsp;1277 words
     </span>
 
 
     <span>
-        <i class="far fa-clock"></i>&nbsp;1 minute
+        <i class="far fa-clock"></i>&nbsp;6 minutes
     </span>
 
 <span>
@@ -218,14 +220,558 @@ Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eir
 </span>
     </div>
     
+    <div class="post-item post-subtitle">
+        <p>
+            Konzept zur Darstellung von Informationen modifizierter Kraftfahrzeuge von JP-Performance
+        </p>
+    </div>
+    
+    
 
     <b>Content</b>
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#versionsverwaltung">Versionsverwaltung</a></li>
+    <li><a href="#einleitung">Einleitung</a>
+      <ul>
+        <li><a href="#ausgangssituation">Ausgangssituation</a></li>
+        <li><a href="#ziele">Ziele</a></li>
+        <li><a href="#nutzen">Nutzen</a></li>
+      </ul>
+    </li>
+    <li><a href="#fachliche-anforderungen">Fachliche Anforderungen</a>
+      <ul>
+        <li><a href="#funktionsbeschreibung">Funktionsbeschreibung</a></li>
+        <li><a href="#grundlage-youtube">Grundlage: YouTube</a></li>
+        <li><a href="#basisdaten">Basisdaten</a></li>
+        <li><a href="#modifizierungen">Modifizierungen</a></li>
+        <li><a href="#messungen">Messungen</a></li>
+        <li><a href="#datenmodell">Datenmodell</a></li>
+        <li><a href="#benutzergruppen-und-berechtigungen">Benutzergruppen und Berechtigungen</a></li>
+        <li><a href="#prozesse--workflows--user-stories">Prozesse / Workflows / User Stories</a>
+          <ul>
+            <li><a href="#benutzer">Benutzer</a></li>
+            <li><a href="#fahrzeug">Fahrzeug</a></li>
+            <li><a href="#weltkarte-von-videos">Weltkarte von Videos</a></li>
+          </ul>
+        </li>
+        <li><a href="#anforderungen-an-oberfläche">Anforderungen an Oberfläche</a></li>
+      </ul>
+    </li>
+    <li><a href="#technische-anforderungen">Technische Anforderungen</a>
+      <ul>
+        <li><a href="#zugriffsmöglichkeiten">Zugriffsmöglichkeiten</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
     
     <div class="post-content markdown-body">
-        <p>Concept</p>
-<p>Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <h2 id="versionsverwaltung">Versionsverwaltung</h2>
+<table>
+<thead>
+<tr>
+<th>Versionsnr.</th>
+<th>Grund der Änderung</th>
+<th>Geändert am</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Initiale Erstellung</td>
+<td>2019-06-12</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><small></small></p>
+<h2 id="einleitung">Einleitung</h2>
+<p>In diesem Abschnitt werden die Umstände und Motivation des Projektes dargestellt.</p>
+<h3 id="ausgangssituation">Ausgangssituation</h3>
+<p>Der Tuner Jean-Pierre Kraemer betreibt die Tuningwerkstatt „JP Performance“ und modifiziert dort hauptsächlich Autos. Neben der Werkstatt besitzt er den größten Automobil-YouTube-Kanal in Deutschland. Die Videos stellen Kundenfahrzeuge und Projektfahrzeuge dar, welche modifiziert und gemessen werden.</p>
+<figure>
+    <img src="/assets/images/projects/jppboosted/jp_performance_logo.jpg" alt="JP-Performance-Logo">
+    <figcaption>
+        JP-Performance-Logo
+    </figcaption>
+</figure>
+<p>Neben standardmäßigen Tuning wie Felgen und Fahrwerk werden auch Umbauten von klein, wie veränderte Luftfilter, bis hin zu großen, wie Motorentausch, vorgenommen und selbst durchgeführt. Den Zuschauern werden diese Projekte nach jeder Modifizierung dargestellt und somit kann jederzeit nachvollzogen werden, welches Tuning welche Veränderungen hervorgebracht haben.
+Neben Zeitenmessungen, wie 0-100 km/h oder 100-200 km/h steht ein Prüfstand zur Verfügung und eine Teststrecke „LaSiSe“ bei der die Fahrzeuge getestet werden können.
+Die Fahrzeuge werden bisher ausschließlich via YouTube dokumentieren. D.h. um Informationen zu den Fahrzeugen zu erhalten, müssen die Videos gesehen werden und unter Umständen, wenn keine Playlist für das Auto vorhanden ist, die Videos zusammengesucht werden.</p>
+<h3 id="ziele">Ziele</h3>
+<p>Die Zieldefinition lautet wie folgt:
+Informationen zu den Fahrzeugen, von Modifizierungen bis hin zu Messungen, einfach zur Verfügung stellen.</p>
+<h3 id="nutzen">Nutzen</h3>
+<p>Pro Fahrzeug kann somit nachvollzogen werden, welche Umbauten vorgenommen wurden mit den zusätzlichen entsprechenden Daten der Messungen, ohne zeitaufwändig auf YouTube Videos zu durchsuchen.</p>
+<h2 id="fachliche-anforderungen">Fachliche Anforderungen</h2>
+<p>In diesem Kapitel werden die Anforderungen beschrieben, welche umgesetzt werden sollen. Hierbei wird nicht auf die Technik eingegangen, sondern lediglich alle Fälle geschildert und gesammelt, welche zum definierten Ziel führen.</p>
+<h3 id="funktionsbeschreibung">Funktionsbeschreibung</h3>
+<p>Es wird ein Werkzeug benötigt um Daten, welche z.B. aus den Videos enstehen, erfassen zu können. Diese erfassten Daten können anschließend in einer strukturierten Weise dargestellt oder durchsucht werden. Es findet somit eine strikte Trennung der Daten und der Darstellung statt.
+Alle Merkmale hängen an einem bestimmten Fahrzeug, welches umgebaut und gemessen wird. Es gibt zum einen unterschiedliche Umbauten, z.B. die verwendeten Teile unterscheiden sich bei allen Projekten, und zum anderen unterschiedliche Messarten, z.B. Messungen auf dem Prüfstand oder Zeitenmessungen. Jeder Zustand, z.B. jede Veränderung, eines Fahrzeugs erzeugt bspw. unterschiedliche Messungen.</p>
+<h3 id="grundlage-youtube">Grundlage: YouTube</h3>
+<p>Alle Informationen stammen aus den zur Verfügung gestellten YouTube-Videos. Das bedeutet auch, dass jedes Video gesehen werden muss um daraus Daten zu gewinnen. Es gibt kein festes Format wie diese hinterlegt sind (z.B. in Abschnitten, etc.), sondern pro Video ist es eine zufällige Reihenfolge und es besteht keine Garantie, dass überhaupt notwendige Informationen enthalten sind. So kann bspw. ein komplettes Video nur ein „Frage-Antwort“-Video sein, ohne Inhalt zu Fahrzeugen.
+Ein Video an sich enthält allerdings immer bestimmte Metdaten, welche zugeordnet werden können.</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Titel</td>
+<td>Titel des Videos</td>
+<td>BMW M3 Nachbau</td>
+</tr>
+<tr>
+<td>Ort (Land u. Stadt)</td>
+<td>Wo das Video (hauptsächlich) gedreht wurde</td>
+<td>Deutschland u. Dortmund oder Japan u. Nagoya</td>
+</tr>
+<tr>
+<td>Url</td>
+<td>Url des Videos</td>
+<td><a href="https://www.youtube.com/watch?=..">https://www.youtube.com/watch?=..</a>.</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        YouTube-Video
+    </figcaption>
+</figure>
+<h3 id="basisdaten">Basisdaten</h3>
+<p>Die Basisdaten an sich sind die Fahrzeugdaten. Diese können sehr detailiert sein, siehe z.B. ADAC-Fahrzeugkatalog, und grob gehalten werden. Es sollten die wichtigsten Basisdaten zu einem Fahrzeug erfasst werden und für weitere Informationen kann auf andere Seiten mit mehr Informationen weiterverlinkt werden. Wichtige Informationen die unter Umständen aufeinander aufbauen sind wie folgt:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Titel</td>
+<td>Titel des Projektes/Umbaus</td>
+<td>BMW M3 Nachbau</td>
+</tr>
+<tr>
+<td>Hersteller</td>
+<td>Hersteller des Fahrzeugs</td>
+<td>BMW</td>
+</tr>
+<tr>
+<td>Herstellermodell-bezeichnung</td>
+<td>Interne Bezeichnung des Herstellers für die Fahrzeugreihe (Code-Name)</td>
+<td>F30</td>
+</tr>
+<tr>
+<td>Herstellerbezeichnung</td>
+<td>Die offizielle Baureihe des Herstellers, wie es vermarktet wird</td>
+<td>3er</td>
+</tr>
+<tr>
+<td>Modell</td>
+<td>Die genaue Modellbezeichnung</td>
+<td>320d</td>
+</tr>
+<tr>
+<td>Kraftstoff</td>
+<td>Mit was das Fahrzeug fortbewegt wird</td>
+<td>Diesel</td>
+</tr>
+<tr>
+<td>Baujahr</td>
+<td>Produktionsdatum des Fahrzeugs</td>
+<td>2017</td>
+</tr>
+<tr>
+<td>Anschaffungsdatum</td>
+<td>Kaufdatum des Fahrzeugs</td>
+<td>2019-03-16</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Fahrzeug-Basis
+    </figcaption>
+</figure>
+<p>Die so eingetragenen Fahrzeuge müssen eindeutig sein, d.h. dass diese unter Umständen mehrfach vorkommen können, aber mit unterschiedlichen Modifizierungen.</p>
+<h3 id="modifizierungen">Modifizierungen</h3>
+<p>Die Modifizierungen sind gekoppelt an ein spezifisches, zuvor eingetragenes, Fahrzeug. Ein Fahrzeug kann mehrere Modifizierungen besitzen. Eine Modifizierung an sich kann vieles bedeuten, darunter der Einbau eines neuen Luftfilters, eine Abgasanlage, ein neues Fahrwerk oder auch ein Motorswap.
+Da es eine Vielzahl an Möglichkeiten gibt, wird es relativ generisch gehalten in Betracht auf die Modifizierung selbst. Allerdings kann jede Modifizierung eine oder mehrere Messungen beinhalten, die Messungen sollte aber nach festen Kriterien eingetragen werden, da diese Daten quantifiziert sind und damit für evtl. spätere Darstellung interessant werden können.
+Mögliche Daten für eine Modifizierung sind:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beschreibung</td>
+<td>Kurze Beschreibung der Modifizierung</td>
+<td>Stage 1</td>
+</tr>
+<tr>
+<td>Fahrzeuggewicht</td>
+<td>Gewicht des Fahrzeugs in KG nach der Modifizierung</td>
+<td>1540 KG</td>
+</tr>
+<tr>
+<td>YouTube-Url</td>
+<td>Video in welchem die Modifizierung gezeigt wird</td>
+<td><a href="http://youtube.de/w=....">http://youtube.de/w=....</a>.</td>
+</tr>
+<tr>
+<td>Modifizierungsdatum</td>
+<td>Datum wann das Video erschienen ist</td>
+<td>2019-04-05</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Fahrzeugmodifizierungen
+    </figcaption>
+</figure>
+<p>Eine Modifizierung kann keine oder mehrere Teile beinhalten. Diese Teile sind generisch gehalten und sollten frei wählbar sein um jederzeit neue Teile und Hersteller aufnehmen zu können:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teilekategorie</td>
+<td>Produktkategorie des verbauten Teils</td>
+<td>Luftfilter</td>
+</tr>
+<tr>
+<td>Teilebezeichnung</td>
+<td>Names des verbauten Produkts des Herstellers</td>
+<td>K&amp;N High-Flow Air Filter</td>
+</tr>
+<tr>
+<td>Teile-Url</td>
+<td>Link zur Teileseite</td>
+<td>http://K&amp;N.de/luftfilter/123</td>
+</tr>
+<tr>
+<td>Hersteller</td>
+<td>Hersteller des Teils</td>
+<td>K&amp;N</td>
+</tr>
+<tr>
+<td>Hersteller-Url</td>
+<td>Link zur Herstellerseite</td>
+<td>http://K&amp;N.de</td>
+</tr>
+<tr>
+<td>Gewicht</td>
+<td>Gewicht in KG des Teils</td>
+<td>14,3 KG</td>
+</tr>
+<tr>
+<td>Gewichtseinsparung</td>
+<td>Einsparung in KG zu vorherigem Teil</td>
+<td>5,6 KG</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Fahrzeugteile
+    </figcaption>
+</figure>
+<h3 id="messungen">Messungen</h3>
+<p>Wie bereits geschildert, werden unter Umständen pro Modifizierung mehrere Messungen durchgeführt. Die aktuellen Messmöglichkeiten sind die Zeitenmessung:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geschwindigkeitsbereich</td>
+<td>Von-Bis-Zeit welche auf Zeit gemessen wird</td>
+<td>0-100 km/h</td>
+</tr>
+<tr>
+<td>Dauer</td>
+<td>Gemessene Zeit in Sekunden</td>
+<td>3.4 Sek.</td>
+</tr>
+<tr>
+<td>Performancebox</td>
+<td>Typ der Messuhr</td>
+<td>Racelogic oder GStarz</td>
+</tr>
+<tr>
+<td>Personen</td>
+<td>Anzahl der Personen im Fahrzeug</td>
+<td>2</td>
+</tr>
+<tr>
+<td>YouTube-Url</td>
+<td>Video in welcher die Messung durchgeführt wurde</td>
+<td><a href="http://youtube.de/w=....">http://youtube.de/w=....</a>.</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Zeitenmessung
+    </figcaption>
+</figure>
+<p>Die Prüfstandsmessung:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PS</td>
+<td></td>
+<td>400 PS</td>
+</tr>
+<tr>
+<td>NM</td>
+<td></td>
+<td>564 NM</td>
+</tr>
+<tr>
+<td>Besitzer</td>
+<td>Besitzer des Prüfstands</td>
+<td>JP Performance</td>
+</tr>
+<tr>
+<td>YouTube-Url</td>
+<td>Video in welcher die Messung durchgeführt wurde</td>
+<td><a href="http://youtube.de/w=....">http://youtube.de/w=....</a>.</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Prüfstandsmessung
+    </figcaption>
+</figure>
+<p>Und die Messung auf einer Teststrecke:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teststrecke</td>
+<td>Name der Teststrecke</td>
+<td>LaSiSe</td>
+</tr>
+<tr>
+<td>Dauer</td>
+<td>Rundenzeit</td>
+<td>01:02:23</td>
+</tr>
+<tr>
+<td>Höchstgeschwindigkeit</td>
+<td>Die höchste Geschwindigkeit, welche auf der Strecke erreicht wurde</td>
+<td>214 km/h</td>
+</tr>
+<tr>
+<td>YouTube-Url</td>
+<td>Video in welcher die Messung durchgeführt wurde</td>
+<td><a href="http://youtube.de/w=....">http://youtube.de/w=....</a>.</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Teststrecke
+    </figcaption>
+</figure>
+<p>Eine Teststrecke besteht aus mehreren Streckenabschnitten. Jeder Streckenabschnitt kann individuell gemessen und somit auch verglichen werden.</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Streckenabschnitt</td>
+<td>Name der Abschnitts</td>
+<td>Fuchsröhre</td>
+</tr>
+<tr>
+<td>Dauer</td>
+<td>Rundenzeit</td>
+<td>00:12:33</td>
+</tr>
+<tr>
+<td>Höchstgeschwindigkeit</td>
+<td>Die höchste Geschwindigkeit, welche auf dem Streckenabschnitt erreicht wurde</td>
+<td>214 km/h</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Teststreckendetails
+    </figcaption>
+</figure>
+<h3 id="datenmodell">Datenmodell</h3>
+<p>Die in den vorangegangenen Kapiteln ermittelten Daten stehen in Zusammenhang zueinander und besitzen Abhängigkeiten. Diese Abhängigkeiten werden in folgender Darstellung abgebildet:</p>
+<figure>
+    <img src="/assets/images/projects/jppboosted/data_model.png" alt="Datenmodell">
+    <figcaption>
+        Datenmodell
+    </figcaption>
+</figure>
+<h3 id="benutzergruppen-und-berechtigungen">Benutzergruppen und Berechtigungen</h3>
+<p>Da die Plattform eine Informationsseite mit speziellen Funktionen ist, sollen die Informationen auch für alle Besucher ohne Einschränkungen sichtbar und einsehbar sein.
+Zum reinen Anzeigen der Informationen wird kein Account oder ähnliches benötigt, sondern nur, wenn Daten hinzugefügt oder bearbeitet werden sollen. In diesem Fall werden spezielle Berechtigungen benötigt, welche an einem Account identifizierbar sein sollen.</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Benutzergruppe</th>
+<th><div style="text-align: center;">Account notwendig</div></th>
+<th><div style="text-align: center;">Berechtigung notwendig</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lesen</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Schreiben</td>
+<td><div style="text-align: center;">X</div></td>
+<td><div style="text-align: center;">X</div></td>
+</tr>
+<tr>
+<td>Admin</td>
+<td><div style="text-align: center;">X</div></td>
+<td><div style="text-align: center;">X</div></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        Rollen und Berechtigungen
+    </figcaption>
+</figure>
+<p>Um Schreibberechtigungen zu erlangen, müssen diese zuvor von einem Administrator freigegeben werden.</p>
+<h3 id="prozesse--workflows--user-stories">Prozesse / Workflows / User Stories</h3>
+<p>Die folgenden User Stories zeigen auf, welche Schritte möglich sein müssen.</p>
+<h4 id="benutzer">Benutzer</h4>
+<p>In diesem Abschnitt werden Aktionen definiert, welche Benutzerbezogen sind. D.h. alles was auf einen Account Einfluss hat. Accounts sind nur notwendig, um bestimmte Aktionen auszuführen, welche Berechtigungen benötigen.</p>
+<h5 id="account-anlegen">Account anlegen</h5>
+<p>Damit ein Nutzer identifiziert werden kann wird ein Account benötigt. Dafür muss sich der Nutzer registrieren können und Daten hinterlegen.
+Als Nutzer möchte ich einen Account anlegen, um Zugang zu administrativen Aktionen zu erhalten.</p>
+<h5 id="einloggen">Einloggen</h5>
+<p>Als Nutzer möchte ich mich in meinen Account einloggen, um mich zu identifizieren.</p>
+<h5 id="schreibberechtigung-beantragen">Schreibberechtigung beantragen</h5>
+<p>Als registrierter Nutzer möchte ich Schreibberechtigungen, um Daten für die Webseite einpflegen zu können.</p>
+<h4 id="fahrzeug">Fahrzeug</h4>
+<p>Aktionen welche Fahrzeugbezogen sind werden in folgendem Abschnitt erläutert. Dieser Abschnitt dient dem Hauptzweck dieses Projekts.</p>
+<h5 id="fahrzeug-anlegen">Fahrzeug anlegen</h5>
+<p>Als registrierter Nutzer möchte ich ein neues Fahrzeug anlegen, um ein neues Projekt- oder Kundenfahrzeug von JPP darzustellen.</p>
+<h5 id="zustand-hinzufügen">Zustand hinzufügen</h5>
+<p>Als registrierter Nutzer möchte ich zu einem Fahrzeug einen neuen Zustand hinzufügen, um den Fortschritt eines Fahrzeugs zu dokumentieren.</p>
+<h5 id="messung-hinzufügen">Messung hinzufügen</h5>
+<h6 id="zeit">Zeit</h6>
+<h6 id="prüfstand">Prüfstand</h6>
+<h6 id="teststrecke">Teststrecke</h6>
+<h5 id="fahrzeug-suchen">Fahrzeug suchen</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/landing_page.png" alt="Landing Page">
+    <figcaption>
+        Landing Page
+    </figcaption>
+</figure>
+<h5 id="detailierte-fahrzeugsuche">Detailierte Fahrzeugsuche</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/fahrzeugsuche.png" alt="Fahrzeugsuche">
+    <figcaption>
+        Fahrzeugsuche
+    </figcaption>
+</figure>
+<h5 id="projektübersicht">Projektübersicht</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/fahrzeuguebersicht.png" alt="Fahrzeugübersicht">
+    <figcaption>
+        Fahrzeugübersicht
+    </figcaption>
+</figure>
+<h5 id="rundenzeitenübersicht">Rundenzeitenübersicht</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/rundenzeituebersicht.png" alt="Rundenzeitenübersicht">
+    <figcaption>
+        Rundenzeitenübersicht
+    </figcaption>
+</figure>
+<h5 id="prüfstandsmessungenübersicht">Prüfstandsmessungenübersicht</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/pruefstandmessunguebersicht.png" alt="Prüfstandsmessungsübersicht">
+    <figcaption>
+        Prüfstandsmessungsübersicht
+    </figcaption>
+</figure>
+<h5 id="zeitenmessungsübersicht">Zeitenmessungsübersicht</h5>
+<figure>
+    <img src="/assets/images/projects/jppboosted/zeitenmessunguebersicht.png" alt="Zeitenmessungsübersicht">
+    <figcaption>
+        Zeitenmessungsübersicht
+    </figcaption>
+</figure>
+<h4 id="weltkarte-von-videos">Weltkarte von Videos</h4>
+<figure>
+    <img src="/assets/images/projects/jppboosted/weltkarte_videos.png" alt="Weltkarte der Videos">
+    <figcaption>
+        Weltkarte der Videos
+    </figcaption>
+</figure>
+<h3 id="anforderungen-an-oberfläche">Anforderungen an Oberfläche</h3>
+<h2 id="technische-anforderungen">Technische Anforderungen</h2>
+<h3 id="zugriffsmöglichkeiten">Zugriffsmöglichkeiten</h3>
 
     </div>
 </article>
@@ -261,7 +807,7 @@ Lorem sdf ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eir
     
         <div class="copyright">
             
-            <span>&copy; 2020, A. Schollwöck
+            <span>&copy; 2021, A. Schollwöck
             </span>
         </div>
     </div>
