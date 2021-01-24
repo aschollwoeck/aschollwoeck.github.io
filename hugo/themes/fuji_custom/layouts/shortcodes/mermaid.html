@@ -1,5 +1,7 @@
 <figure>
-    {{ .Inner | markdownify }}
+    <div class="mermaid">
+        {{.Inner}}
+    </div>
     <figcaption>
         <em>{{ .Get "title" }}</em>
     </figcaption>

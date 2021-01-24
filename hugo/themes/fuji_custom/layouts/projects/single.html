@@ -36,6 +36,12 @@
     </blockquote>
 </div>
 {{ end }}
+
+{{ if (.Params.diagrams) }}
+<!-- MermaidJS support -->
+<script async src="/assets/js/mermaid.min.js"></script>
+{{ end }}
+
 {{ if and (.Site.Params.disqusJSApi) (ne .Params.showComments false) }}
 {{ partial "comment-disqusjs.html" . }}
 {{ else if and (.Site.Params.disqusShortname) (ne .Params.showComments false) }}
