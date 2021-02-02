@@ -216,9 +216,10 @@ article p {
 
 article table {
     width: 100%;
+    word-break: break-word;
 }
 
-figcaption::before {counter-increment: figcaption; content: "Abbildung " counter(figcaption) ": "}
+figcaption::before {counter-increment: figcaption; content: "Abbildung " counter(figcaption) " "}
 
 figure {
     margin: 0;
@@ -232,4 +233,8 @@ figcaption {
 
 thead {
     background-color: #eee;
+}
+
+svg {
+    width: 100%;
 }

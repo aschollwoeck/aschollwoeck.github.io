@@ -1,4 +1,11 @@
 {{ define "main" }}
+
+<div class="sidebar">
+    {{ partial "sidebar.html" . }}
+</div>
+<!-- list -->
+<div class="content">
+
 <article>
     <!-- post meta -->
     <div class="post-item post-title">
@@ -40,4 +47,7 @@
 {{ else if and (.Site.Params.utterancesRepo) (ne .Params.showComments false) }}
 {{ partial "comment-utterances.html" . }}
 {{ else }}{{ end }}
+
+</div>
+
 {{ end }}

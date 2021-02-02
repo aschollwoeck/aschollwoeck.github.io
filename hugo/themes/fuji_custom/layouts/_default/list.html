@@ -1,4 +1,11 @@
 {{ define "main" }}
+
+<div class="sidebar">
+    {{ partial "sidebar.html" . }}
+</div>
+<!-- list -->
+<div class="content">
+
 <!-- homepage range in all posts -->
 {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
 {{ range $paginator.Pages }}
@@ -70,5 +77,7 @@
     {{ end }}
 </ul>
 {{ end }}
+    
+</div>
 
 {{ end }}

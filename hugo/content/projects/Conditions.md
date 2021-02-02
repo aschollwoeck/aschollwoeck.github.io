@@ -23,7 +23,7 @@ Im folgenden werden die Ziele und der Nutzen auf Basis einer Situtation beschrie
 Vertriebskonditionen treten in unterschiedlichen Formen auf. Diese sind unter Umständen teil von Verträgen und müssen dementsprechend verwaltet werden, so dass verhandelte Konditionen zu den richtigen Zeitpunkten zur Verfügung stehen.
 Beispielsweise müssen in der Angebotsphase verhandelte Rabatte oder Preise verwendet werden.
 
-Konditionen werden bisher nach bestem Wissen und Gewissen gepfelgt.
+Konditionen werden bisher nach bestem Wissen und Gewissen gepflegt.
 
 Eine Verifikation der Konditionen gibt es bis dato nicht, es beruht alles auf Expertenwissen und dem Vertrauen, dass dieses komplett und 100% richtig ist.
 
