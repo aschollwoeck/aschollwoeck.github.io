@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+<title>Konditionsverwaltung - A. Schollwöck&#39;s Blog</title>
+
+
+<meta name="author" content="A. Schollwöck" />
+
+
+<meta name="description" content="Blog of work and hobby related topics and projects" />
+
+
+<meta name="keywords" content="programming, .net core, work" />
+
+<meta property="og:title" content="Konditionsverwaltung" />
+<meta property="og:description" content="Versionsverwaltung    Versionsnr. Grund der Änderung Geändert am       1 Initiale Erstellung 2021-01-10      
+Einleitung Im folgenden werden die Ziele und der Nutzen auf Basis einer Situtation beschrieben.
+Ausgangssituation Vertriebskonditionen treten in unterschiedlichen Formen auf. Diese sind unter Umständen teil von Verträgen und müssen dementsprechend verwaltet werden, so dass verhandelte Konditionen zu den richtigen Zeitpunkten zur Verfügung stehen." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/projects/condition-management/" />
+<meta property="og:image" content="/img/avatar.jpg"/>
+<meta property="article:published_time" content="2020-12-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-20T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/img/avatar.jpg"/>
+
+<meta name="twitter:title" content="Konditionsverwaltung"/>
+<meta name="twitter:description" content="Versionsverwaltung    Versionsnr. Grund der Änderung Geändert am       1 Initiale Erstellung 2021-01-10      
+Einleitung Im folgenden werden die Ziele und der Nutzen auf Basis einer Situtation beschrieben.
+Ausgangssituation Vertriebskonditionen treten in unterschiedlichen Formen auf. Diese sind unter Umständen teil von Verträgen und müssen dementsprechend verwaltet werden, so dass verhandelte Konditionen zu den richtigen Zeitpunkten zur Verfügung stehen."/>
+
+
+<link rel="stylesheet" href="/assets/css/normalize.css" />
+<link rel="stylesheet" href="/assets/css/skeleton.css" />
+<link rel="stylesheet" href="/assets/css/blog.css" />
+<link rel="stylesheet" href="/assets/css/font-awesome/css/all.min.css" def />
+
+
+
+
+</head>
+
+<body>
+    <header>
+    <nav>
+        <div class="header container">
+            <div class="twelve columns">
+                <h1 class="title">
+                    <a class="title-main" href="/">A. Schollwöck&#39;s Blog</a>
+                </h1>
+                
+            
+                <ul class="title title-nav">
+                    
+                    <li>
+                        <a class="title-main-nav" href="/">Blog</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <div class="container">
+
+            
+<article autonumbering>
+    
+    <div class="post-item post-title">
+        
+        Konditionsverwaltung
+    </div>
+    <div class="post-item post-meta">
+        <span>
+    
+    
+    <i class="fas fa-calendar-alt"></i>&nbsp;Dec 20, 2020
+</span>
+
+    <span>
+        <i class="fas fa-inbox"></i>&nbsp;2781 words
+    </span>
+
+
+    <span>
+        <i class="far fa-clock"></i>&nbsp;14 minutes 
+    </span>
+
+<span>
+    
+    <i class="fas fa-tags"></i>
+    
+        
+        
+            <a href="/tags/programming">programming</a>&nbsp;
+        
+            <a href="/tags/.net-core">.net core</a>&nbsp;
+        
+            <a href="/tags/work">work</a>&nbsp;
+        
+    
+</span>
+    </div>
+    
+    <div class="post-item post-subtitle">
+        <p>
+            Verwaltung von Konditionen im SAP-Umfeld
+        </p>
+    </div>
+    
+    
+
+    <b>Content</b>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#versionsverwaltung">Versionsverwaltung</a></li>
+    <li><a href="#einleitung">Einleitung</a>
+      <ul>
+        <li><a href="#ausgangssituation">Ausgangssituation</a></li>
+        <li><a href="#ziele">Ziele</a></li>
+        <li><a href="#nutzen">Nutzen</a></li>
+      </ul>
+    </li>
+    <li><a href="#grundlagen">Grundlagen</a>
+      <ul>
+        <li><a href="#konditionen">Konditionen</a></li>
+      </ul>
+    </li>
+    <li><a href="#fachliche-anforderungen">Fachliche Anforderungen</a>
+      <ul>
+        <li><a href="#konditionsverwaltung">Konditionsverwaltung</a>
+          <ul>
+            <li><a href="#definition">Definition</a></li>
+            <li><a href="#status">Status</a></li>
+            <li><a href="#fragebaum">Fragebaum</a></li>
+            <li><a href="#expertenmodus">Expertenmodus</a></li>
+            <li><a href="#berechnung--ermittlung">Berechnung / Ermittlung</a></li>
+            <li><a href="#datenmodell">Datenmodell</a></li>
+            <li><a href="#aktionen">Aktionen</a></li>
+          </ul>
+        </li>
+        <li><a href="#konditionssimulation">Konditionssimulation</a>
+          <ul>
+            <li><a href="#geschäftsfälle">Geschäftsfälle</a></li>
+            <li><a href="#veränderung-von-konditionen">Veränderung von Konditionen</a></li>
+            <li><a href="#berechnung-kalkulation">Berechnung (Kalkulation)</a></li>
+            <li><a href="#vergleiche">Vergleiche</a></li>
+          </ul>
+        </li>
+        <li><a href="#funktionsbeschreibung">Funktionsbeschreibung</a></li>
+      </ul>
+    </li>
+    <li><a href="#technische-anforderungen">Technische Anforderungen</a>
+      <ul>
+        <li><a href="#zugriffsmöglichkeiten">Zugriffsmöglichkeiten</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+    
+    <div class="post-content markdown-body">
+        <h2 id="versionsverwaltung">Versionsverwaltung</h2>
+<table>
+<thead>
+<tr>
+<th>Versionsnr.</th>
+<th>Grund der Änderung</th>
+<th>Geändert am</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Initiale Erstellung</td>
+<td>2021-01-10</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><small></small></p>
+<h2 id="einleitung">Einleitung</h2>
+<p>Im folgenden werden die Ziele und der Nutzen auf Basis einer Situtation beschrieben.</p>
+<h3 id="ausgangssituation">Ausgangssituation</h3>
+<p>Vertriebskonditionen treten in unterschiedlichen Formen auf. Diese sind unter Umständen teil von Verträgen und müssen dementsprechend verwaltet werden, so dass verhandelte Konditionen zu den richtigen Zeitpunkten zur Verfügung stehen.
+Beispielsweise müssen in der Angebotsphase verhandelte Rabatte oder Preise verwendet werden.</p>
+<p>Konditionen werden bisher nach bestem Wissen und Gewissen gepflegt.</p>
+<p>Eine Verifikation der Konditionen gibt es bis dato nicht, es beruht alles auf Expertenwissen und dem Vertrauen, dass dieses komplett und 100% richtig ist.</p>
+<p>Da Konditionen nicht formal definiert werden, ist es auch nicht möglich eine formale Verifikation durchzuführen und deshalb werden nur die <strong>wichtigsten</strong> Geschäftsfälle in 100% manueller Arbeit getestet.</p>
+<p>Durch diese Vorgehensweise ist <strong>nie</strong> sichergestellt, dass die wirkliche Intention (Z.B. Verträge) korrekt im System abgebildet ist.</p>
+<p>Des Weiteren werden &ldquo;Abkürzungen&rdquo; bzw. &ldquo;Bequemlichkeiten&rdquo; eingeführt, da der entstehende <strong>manuelle Aufwand</strong> die Intentionen in Konditionen darzustellen zu hoch wird (bspw. werden weitere Zugriffsfolgen verwendet um andere Konditionen zu &ldquo;deaktivieren&rdquo;). Dadurch werden weitere Komplexitätsstufen erzeugt, welche von Anfang an, mit einer formalen Definition, nicht nötig gewesen wären und <strong>weitere Fehlerquellen darstellen !</strong>.</p>
+<h3 id="ziele">Ziele</h3>
+<p>Zum einen soll die Verwaltung der Konditionen vom System so unterstützt werden um manuelle  Eingriffe und damit erhöhten manuellen Aufwand zu reduzieren.
+Des Weiteren sollen Aktionen auf einzelnen Konditionssätzen verringert bzw. vereinfacht werden.</p>
+<p>Darauf aufbauend sollen Intentionen (Verträge bzgl. Preise, Rabatte, etc.) formal definiert werden können um notwendige Konditionen ableiten bzw. errechnen zu lassen.</p>
+<p>Sobald eine Verwaltung ermöglicht wurde, soll es möglich sein Simulationen durch zu führen. Die Simulationen sollen dabei die gesamte Konditionstechnik abbilden (Konditionen und Kalkulation).</p>
+<h3 id="nutzen">Nutzen</h3>
+<p>Durch formale Definitionen können ein leichtes Updates und Konditionen ermittelt werden. Dadurch bleiben Konditionen aktuell, auch wenn Ausprägungen / Parameter, also Rahmenbedingungen, verändert werden.</p>
+<p>Des Weiteren soll es möglich sein Simulationen über diverse Geschäftsmöglichkeiten zu erstellen und dadurch die tatsächlichen Auswirkungen der Konditionen zu prüfen und zu vergleichen. Um die Simulationen durch zu führen muss es möglich sein Parameter zu definieren, welche Geschäftsfälle definieren und mittels definierbaren Kalkulationsschemen Konditionen zu ermitteln und Ergebnisse zu berechnen. Daraus können Vergleiche her- und dargestellt werden und somit Unterschiede einfach identifiziert werden.</p>
+<p>Die Simulation(en) soll nicht nur bei neu definierten Konditionen verfügbar sein, sondern auch separat aufgerufen werden können und Konditionen, Konditionsarten, Zugriffsfolgen und Kalkulationsschemen verändern können. &ldquo;Verändern&rdquo; bedeutet, dass diese Objekte <strong>innerhalb</strong> der Simulation neu definiert, verändert, als auch gelöscht/deaktiviert werden können.</p>
+<p>Mit Hilfe der Simulationen von Konditionen können Eingriffe in die Konditionstechnik im vorhinein geprüft und mit dem aktuellen bzw. anderen Zuständen verglichen werden.
+Dadurch wird es möglich sein geplante Veränderungen im vorhinein für alle Geschäftsfälle zu simulieren, ob die gewünschten Ergebnisse erzielt werden.</p>
+<h2 id="grundlagen">Grundlagen</h2>
+<p>In diesem Bereich werden Basiselemente beschrieben und definiert, welche für den späteren Verlauf notwendig sind.</p>
+<h3 id="konditionen">Konditionen</h3>
+<p>Als Definition für eine Kondition wird die Beschreibung von SAP verwendet. Eine Kondition ist ein Wert, welcher an eine Bedingung geknüpft ist. Um Preise zu ermitteln werden diese Bedingungen in einer Kalkulation verwendet. Bedingungen können unterschiedlichste Faktoren sein, welche sich aus Rahmenbedingungen (z.B. Angebotsdatum, Kunde) und produktspezifischen Bedinungen (z.B. das Produkt, die Bestellmenge) ableiten.</p>
+<p>Eine Kalkulation ist eine Art Rechenvorschrift, welche Arten von Werten verwendet werden und wie diese miteinander verrechnet werden sollen. In eine Angebotskalkulation gibt es bspw. die Arten</p>
+<ul>
+<li>Preis</li>
+<li>Abschlag / Rabatt / Mark down</li>
+<li>Aufschlag / Mark up.</li>
+</ul>
+<p>Pro Art wird eine Konditions<strong>art</strong> definiert und für jede Art werden Bedingungen für Konditionen definiert. Pro Konditionsart und Kombination aus Bedingungen kann es genau 0 oder 1 Ergebnis geben.</p>
+<p>Eine Kondition besitzt die Eigenschaften:
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nummer</td>
+<td>Eindeutiges Kennzeichen</td>
+<td>10384872, &hellip;</td>
+</tr>
+<tr>
+<td>Betrag</td>
+<td>Der Wert der Kondition</td>
+<td>5, 1539,99, &hellip;</td>
+</tr>
+<tr>
+<td>Einheit</td>
+<td>Die Einheit der Kondition</td>
+<td>%, EUR, &hellip;</td>
+</tr>
+<tr>
+<td>Vorzeichen</td>
+<td>Gibt an ob positiv oder negativ</td>
+<td>- oder +</td>
+</tr>
+<tr>
+<td>Berechnungsregel</td>
+<td>Gibt an wie der Wert verrechnet werden muss</td>
+<td></td>
+</tr>
+<tr>
+<td>Ausschschluss</td>
+<td>Ein Zusatzkennzeichen</td>
+<td></td>
+</tr>
+<tr>
+<td>Verkaufsaktion</td>
+<td>Gibt an ob Kondition verknüpft ist</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Kondition-Modell</em>
+    </figcaption>
+</figure></p>
+<p>Das Modell für eine Bedingung pro Kondition:
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Merkmal</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KondNummer</td>
+<td>Eindeutiger Verweis auf Kondition</td>
+<td>10384872, &hellip;</td>
+</tr>
+<tr>
+<td>Art</td>
+<td>Das Kennzeichen der Konditionsart</td>
+<td>AB00, PR00, &hellip;</td>
+</tr>
+<tr>
+<td>Bedingung #1</td>
+<td>Es muss mindestens 1 Feld definiert werden</td>
+<td>Kdnr=1234, Matnr=9684, &hellip;</td>
+</tr>
+<tr>
+<td>Bedingung #n..m</td>
+<td>Es sind beliebig weitere Felder möglich</td>
+<td>Kdnr=1234, Matnr=9684, &hellip;</td>
+</tr>
+<tr>
+<td>Gültig von</td>
+<td>Ab wann die Kondition gültig ist</td>
+<td>01.01.2020</td>
+</tr>
+<tr>
+<td>Gültig bis</td>
+<td>Bis wann die Kondition gültig ist</td>
+<td>31.12.2020</td>
+</tr>
+<tr>
+<td>Gelöscht</td>
+<td>Das Löschkennzeichen</td>
+<td>&ldquo;&rdquo;, X</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Konditionsbedingung-Modell</em>
+    </figcaption>
+</figure></p>
+<p>Da es pro Konditionsart unterschiedliche Bedingungen geben kann muss diesen eine Gewichtung verliehen werden. Ansonsten könnte nicht unterschieden werden, wenn für eine Anzahl an Parametern mehrere Bedingungen erfüllt werden würde, welche Kondition verwendet werden soll. Deshalb wird den Bedingungen eine Zugriffsreihenfolge verliehen, d.h. welche Bedingungen vor anderen geprüft werden sollen.</p>
+<p>Ein Beispiel von Zugriffsfolgen für eine Konditionsart &ldquo;PR00 - Listenpreis&rdquo; könnte sein:
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Feld #1</th>
+<th>Feld #2</th>
+<th>Feld(n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matnr</td>
+<td>Kdnr</td>
+<td></td>
+</tr>
+<tr>
+<td>Matnr</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Zugriffsfolgen-Beispiel</em>
+    </figcaption>
+</figure></p>
+<p><a href="https://help.sap.com/viewer/14ad85ff93b342afb770eb468a9fd898/6.00.31/de-DE/5e49b753128eb44ce10000000a174cb4.html" target="_blank">Konditionen und Preisfindung</a></p>
+<h2 id="fachliche-anforderungen">Fachliche Anforderungen</h2>
+<p>Die Anforderungen trennen sich in einen Verwaltungs- und einen Simulationsteil. Die Grundlagen werden für beide Teile benötigt und ein Austausch der Anteile untereinander soll ebenfalls möglich sein.</p>
+<h3 id="konditionsverwaltung">Konditionsverwaltung</h3>
+<p>Wie eingangs angesprochen wird eine formale Definition von Konditionen bzw. den Bedingungen gefordert. Diese formalen Definitionen - und damit auch die daraus hervorgehenden Konditionssätze - müssen allerdings auch verwaltet werden. Es muss also erst ein Verwaltungssystem erstellt werden, mit dessen Hilfe formale Beschreibungen möglich bzw. Bestandteil sind.</p>
+<h4 id="definition">Definition</h4>
+<p>Klassische Fälle von formalen Beschreibungen sind bspw. Auf- und Abschläge, welche den gleichen Wert für mehrere Bedingungen definieren. Als Beispiel dient ein Rabatt, welcher allen Landesgesellschaften in gleicher Höher für eine bestimmte Produktgruppe gewährt werden soll. Dafür werden alle Gesellschaften ausgewählt, die Produktgruppenmerkmale und einmalig der Wert festgelegt.
+Durch die Definition &ldquo;Alle Gesellschaften&rdquo; und &ldquo;einem Wert&rdquo; können die Rabattsätze automatisch ermittelt werden. Durch die automatische Ermittlung lässt sich auch bei Ergänzung einer neuen Gesellschaft einfach der Rabatt erweitern.</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Wert</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Konditionsart</td>
+<td>Interner Rabatt (ZR01)</td>
+<td></td>
+</tr>
+<tr>
+<td>Bedingung #1</td>
+<td>Landesgesellschaft = Europa</td>
+<td></td>
+</tr>
+<tr>
+<td>Bedingung #2</td>
+<td>Produktgruppe = ABC</td>
+<td></td>
+</tr>
+<tr>
+<td>Wert</td>
+<td>15%</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Formale Definition Beispiel</em>
+    </figcaption>
+</figure>
+<p>Das Ergebnis sind die einzelnen berechneten Konditionssätze, welche in diesem Fall das Kreuzprodukt der Bedingungen ist:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kondart</th>
+<th>Bedingung #1</th>
+<th>Bedingung #2</th>
+<th>Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZR01</td>
+<td>VKB = 100</td>
+<td>Prd.grp. = ABC</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>ZR01</td>
+<td>VKB = 200</td>
+<td>Prd.grp. = ABC</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>ZR01</td>
+<td>VKB = 300</td>
+<td>Prd.grp. = ABC</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>ZR01</td>
+<td>VKB = 400</td>
+<td>Prd.grp. = ABC</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>&hellip;</td>
+<td>&hellip;</td>
+<td>&hellip;</td>
+<td>&hellip;</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Ermittelte Konditionssätze (Formale Definition) Beispiel</em>
+    </figcaption>
+</figure>
+<p>In vielen Fällen ist eine formale Definition wie eine einzelne Definition, da die formale Definition so spezifisch ist, dass im Prinzip einzelne Konditionssätze definiert werden. In diesen Fällen ist es nicht sinnvoll eine formale Definition zu erstellen, sondern den Nutzer so zu unterstützen, dass die Konditionen mit einfachen Mitteln und so viel Unterstützung wie möglich erstellt werden können.</p>
+<h4 id="status">Status</h4>
+<p>Wird eine neue Defintion angelegt durchläuft diese einige Stati. Mit dessen Hilfe kann die Dateneingabe unterteilt und weitere Aktionen deterministisch gestartet werden.</p>
+<figure>
+    <div class="mermaid">
+        
+
+stateDiagram-v2
+
+    [*] --> Definition
+
+    state Definition {
+        [*] --> New
+        New --> Editing : edit
+        Editing --> Released : release
+        Released --> [*]
+    }
+    
+
+    </div>
+    <figcaption>
+        <em>Definition: Zustandsdiagramm</em>
+    </figcaption>
+</figure>
+<p>In jedem Zustand sind Aktionen des Nutzers oder Systems notwendig:</p>
+<ul>
+<li>New:
+Fragebaum wird befüllt.</li>
+<li>Editing:
+Kondition werden befüllt.</li>
+<li>Released:
+Kondition werden eingefroren.</li>
+</ul>
+<h5 id="aktion-neue-konditionen-formale-definition">Aktion: Neue Konditionen (Formale Definition)</h5>
+<h5 id="aktion-neue-konditionen-">Aktion: Neue Konditionen ()</h5>
+<h5 id="aktion-approval-workflow">Aktion: Approval-Workflow</h5>
+<h5 id="aktion-erinnerungs-workflow">Aktion: Erinnerungs-Workflow</h5>
+<p>Einzelne Konditionssätze sollen nicht manuell gepflegt werden.</p>
+<h4 id="fragebaum">Fragebaum</h4>
+<p>Die erste Unterstützung für die Nutzer ist ein Fragebaum, der sie zum einen in die richtige Richtung der Konditionsarten schickt und zum anderen die Bedingungen abfrägt.</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kategorie</th>
+<th>Feld</th>
+<th>Frage</th>
+<th>Werte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Art</td>
+<td>Art</td>
+<td>Art der Kondition(en)?</td>
+<td>Preis, Aufschlag, Abschlag, Provision</td>
+</tr>
+<tr>
+<td>Art</td>
+<td><div>Anwendungsgebiet</div></td>
+<td>Anwendungsgebiet?</td>
+<td>Zentral, Lokal</td>
+</tr>
+<tr>
+<td>Art</td>
+<td>Verwendung</td>
+<td>Verwendung für?</td>
+<td>Kunde, Intern</td>
+</tr>
+<tr>
+<td>Art</td>
+<td>Berechnung</td>
+<td>Rechenart?</td>
+<td>Standard, FinSal</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>VKORG</td>
+<td>Geber</td>
+<td>Alle, 1000, 5000, &hellip;</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>VKB</td>
+<td>Empfänger</td>
+<td>Alle, 600, 701, &hellip;</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>Positionsfelder</td>
+<td>Positionsdaten</td>
+<td>MG, Familie, Material, &hellip;</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Felder für Fragebaum</em>
+    </figcaption>
+</figure>
+<p>Aufgrund der Antworten des Fragebaums können Zustände errechnet werden. Die Diagramme zur Errechnungen sind wie folgt:</p>
+<figure>
+    <div class="mermaid">
+        
+graph LR;
+    
+        P[Preis]-->PR00;
+    
+
+    </div>
+    <figcaption>
+        <em>Fragebaum: Konditionsartenfindung Preis</em>
+    </figcaption>
+</figure>
+<figure>
+    <div class="mermaid">
+        
+graph LR;
+    
+        Auf[Aufschlag];
+            Auf-->AufZ[Zentral];
+                AufZ-->AufZK[Kunde];
+                    AufZK-->ZRM0;
+                AufZ-->AufZI[Intern];
+                    AufZI-->ZRM1;
+            Auf-->AufL[Lokal];
+                AufL-->AufLK[Kunde];
+                    AufLK-->YRM0;
+                AufL-->AufLI[Intern];
+                    AufLI-->YRM1;
+                    
+
+    </div>
+    <figcaption>
+        <em>Fragebaum: Konditionsartenfindung Aufschlag</em>
+    </figcaption>
+</figure>
+<figure>
+    <div class="mermaid">
+        
+graph LR;
+
+        Ab[Abschlag];
+            Ab-->AbZ[Zentral];
+                AbZ-->AbZK[Kunde];
+                    AbZK-->ZR00;
+                AbZ-->AbZI[Intern];
+                    AbZI-->AbZIS[Standard];
+                        AbZIS-->ZR01;
+                    AbZI-->AbZIFinSal[FinSal];
+                        AbZIFinSal-->ZR11;
+            Ab-->AbL[Lokal];
+                AbL-->AbLK[Kunde];
+                    AbLK-->YR00;
+                AbL-->AbLI[Intern];
+                    AbLI-->YR01;
+
+
+    </div>
+    <figcaption>
+        <em>Fragebaum: Konditionsartenfindung Abschlag</em>
+    </figcaption>
+</figure>
+<figure>
+    <div class="mermaid">
+        
+graph LR;
+    
+        Prov[Provision];
+            Prov-->ProvZ[Zentral];
+                ProvZ-->ZP01;
+            Prov-->ProvD[Dezentral];
+                ProvD-->ZP02;
+            Prov-->ProvU[Umlage];
+                ProvU-->ProvUS[Standard];
+                    ProvUS-->ZP03;
+                ProvU-->ProvUFinSal[FinSal];
+                    ProvUFinSal-->ZP13;
+
+
+    </div>
+    <figcaption>
+        <em>Fragebaum: Konditionsartenfindung Provision</em>
+    </figcaption>
+</figure>
+<p>Wurden die Konditionsarten ermittelt, können auch die möglichen Schlüsselkombinationen ermittelt werden. Das Kreuzprodukt der im Fragebaum angegebenen Bedingungen ergibt die notwendige Schlüsselkombination (also die Kombination aller Bedingungen).</p>
+<p>Wurde keine Schlüsselkombination gefunden soll eine entsprechende Meldung ausgegeben werden. Das eine neue Schlüsselkombination angelegt werden muss oder andere Bedingungen verwendet werden müssen.</p>
+<h4 id="expertenmodus">Expertenmodus</h4>
+<p>Nicht immer ist ein Fragebaum gewünscht oder auch notwendig. In diesen Fällen wird die Annahme getroffen, dass sich der Nutzer mit der Konditionstechnik sehr gut auskennt und Erfahrung hat. Anstatt dem Fragebaum soll direkt die Konditionsart und die gewünschte Schlüsselfolge ausgewählt werden. Das Ergebnis ist somit das selbe wie, wenn der Fragebaum gewählt worden wäre und es können die selben weiter notwendigen Aktionen durchgeführt werden.</p>
+<h4 id="berechnung--ermittlung">Berechnung / Ermittlung</h4>
+<p>Wurde die Konditionsart und Schlüsselfolge ermittelt müssen im weiteren Verlauf noch die notwendigen Konditionswerte eingetragen werden. Dazu sollen einige Hilfsmittel zur Verfügung gestellt werden, welche das Leben etwas erleichtern.</p>
+<h5 id="konditionen-errechnen">Konditionen errechnen</h5>
+<p>Wurde die Definition der Konditionen via Fragebaum vorgenommen können mittels der eingetragenen Bedingungen die notwendigen Bedingungskombinationen errechnet werden. Dadurch müssen diese nicht vom Nutzer selbst ermittelt werden. In einigen Fällen kann in diesem Schritt auch der Wert vorgegeben werden, wenn dieser in allen Kombinationen der selbe sein soll.</p>
+<p>In folgendem Beispiel werden aus den Werten des Fragebaums und der ausgewählten Schlüsselkombination die notwendigen Konditionen mit Bedingungskombinationen errechnet.</p>
+<p>Der Fragebaum wurde mit folgenden Werten beantwortet:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kategorie</th>
+<th>Feld</th>
+<th>Frage</th>
+<th>Werte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Art</td>
+<td>Art</td>
+<td>Art der Kondition(en)?</td>
+<td>Abschlag</td>
+</tr>
+<tr>
+<td>Art</td>
+<td><div>Anwendungsgebiet</div></td>
+<td>Anwendungsgebiet?</td>
+<td>Zentral</td>
+</tr>
+<tr>
+<td>Art</td>
+<td>Verwendung</td>
+<td>Verwendung für?</td>
+<td>Kunde</td>
+</tr>
+<tr>
+<td>Art</td>
+<td>Berechnung</td>
+<td>Rechenart?</td>
+<td>Standard</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>VKORG</td>
+<td>Geber</td>
+<td>1000, 7100</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>Kopffelder</td>
+<td>Kopfdaten</td>
+<td>KGRP = 40</td>
+</tr>
+<tr>
+<td>Bed.</td>
+<td>Positionsfelder</td>
+<td>Positionsdaten</td>
+<td>MG = 01</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Fragebaum: Beispiel</em>
+    </figcaption>
+</figure>
+<p>Die die daraus abgeleitete Konditionsart und Schlüsselkombination wird vorgeschlagen/vorausgewählt:
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kondart</th>
+<th>Schlüsselkombination</th>
+<th>Ausgewählt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZR00</td>
+<td>VKORG, KGRP, MG</td>
+<td>X</td>
+</tr>
+<tr>
+<td>ZR00</td>
+<td>KGRP, MG</td>
+<td></td>
+</tr>
+<tr>
+<td>ZR00</td>
+<td>VKORG, MG</td>
+<td></td>
+</tr>
+<tr>
+<td>ZR00</td>
+<td>MG</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Ermittelte Konditionsart und Schlüsselkombinationen: Beispiel</em>
+    </figcaption>
+</figure></p>
+<p>Aufgrund der Informationen können nun die notwendigen Konditionen mit Bedingungen errechnet werden: 
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kondart</th>
+<th>Bedingung #1</th>
+<th>Bedingung #2</th>
+<th>Bedingung #3</th>
+<th>Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZR00</td>
+<td>VKORG = 1000</td>
+<td>KGRP = 40</td>
+<td>MG = 01</td>
+<td></td>
+</tr>
+<tr>
+<td>ZR00</td>
+<td>VKORG = 7100</td>
+<td>KGRP = 40</td>
+<td>MG = 01</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Berechnete Konditionen: Beispiel</em>
+    </figcaption>
+</figure></p>
+<p>Im Anschluss müssen die Werte eingetragen werden.</p>
+<h5 id="konditionen-swerte-einfügen-copy--paste">Konditionen/-swerte einfügen (Copy &amp; Paste)</h5>
+<h4 id="datenmodell">Datenmodell</h4>
+<figure>
+    <div class="mermaid">
+        
+erDiagram
+    
+    DEFINITION }o--o{ TAG : has    
+    DEFINITION {
+        string name
+        string version
+        string beschreibung
+        fragebaum baum
+    }
+
+    TAG {
+        string name
+    }
+
+    DEFINITION ||--o{ CONDITION : has
+    CONDITION {
+        decimal betrag
+        string einheit
+        string vorzeichen
+        string ausschluss
+        string verkaufsaktion
+        string kondnummer
+        string art
+        date gueltigvon
+        date gueltigbis
+        bool geloescht
+    }
+
+    CONDITION ||--|| BEDINGUNG : has
+    BEDINGUNG {
+        string key
+        string value
+    }
+
+
+    </div>
+    <figcaption>
+        <em>Definition: Datenmodell</em>
+    </figcaption>
+</figure>
+<h4 id="aktionen">Aktionen</h4>
+<p>Im folgenden werden Aktionen definiert die möglich sein müssen. Die Aktionen beziehen sich auf grundsätzliche Dinge wie bspw. neue Definitionen anlegen als auch spezifische Aktionen, welche in einer Definition ausgeführt werden sollen können.</p>
+<h5 id="neue-definition">Neue Definition</h5>
+<p>Der Startpunkt ist das Erstellen einer neuen Definition. Die Definition beinhaltet einen Namen und sprechende Schlagworte (Tags) um im Nachhinein die Suche zu vereinfachen. Des Weiteren wird entweder ein Fragebaum beantwortet oder im Expertenmodus direkt die Konditionsart und die Schlüsselkombination befüllt.</p>
+<p>Eine neue Version identifiziert sich über einen Namen und eine Versionssnummer. Da Konditionen nicht für immer fix sind muss es möglich sein diese in Zukunft auch zu ändern. Dazu wird die selbe Defintion verwendet, allerdings mit einer neue Version.</p>
+<p>Die nächsten möglichen Schritte sind: Löschen oder Konditionen bearbeiten</p>
+<h5 id="definition-bearbeiten">Definition bearbeiten</h5>
+<h5 id="update-definition">Update Definition</h5>
+<p>Ein Update ist das selbe wie eine neue Version. Das heißt, dass eine bestehende Definition verwendet wird und dazu alle oder bestimmte Kondititionen aktualisiert / verändert werden.</p>
+<p>Mit einem Vergleich der vorhergehenden Defintion und der neuen Definition können Unterschiede ermittelt werden.
+<figure>
+    <svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="781px" height="1586px" viewBox="-0.5 -0.5 781 1586" content="&lt;mxfile host=&quot;8a6709a0-ecba-4d16-b1e8-891e01b77a9f&quot; modified=&quot;2021-02-06T15:09:23.312Z&quot; agent=&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.52.1 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36&quot; etag=&quot;XQVdJmsqfV-NEYaf5GkD&quot; version=&quot;13.10.0&quot; type=&quot;embed&quot;&gt;&lt;diagram id=&quot;-8ASoFGtcusVafRYhSpK&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="580" y="125" width="200" height="410" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 580 125 L 780 535 M 780 125 L 580 535" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="105" width="570" height="480" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 0 105 L 570 585 M 570 105 L 0 585" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="50" y="15" width="230" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="18px">
+            <text x="51.5" y="33.5">
+                Blog Name
+            </text>
+        </g>
+        <path d="M 0 50 L 780 50" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 0 80 L 780 80" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="67.5">
+                Home
+            </text>
+        </g>
+        <rect x="40" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="41.5" y="67.5">
+                About
+            </text>
+        </g>
+        <rect x="440" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="441.5" y="67.5">
+                Associated blogs
+            </text>
+        </g>
+        <rect x="0" y="105" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="117.5">
+                Article 1
+            </text>
+        </g>
+        <rect x="0" y="135" width="530" height="250" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 528px; height: 1px; padding-top: 137px; margin-left: 2px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <br/>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="2" y="149" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididu...
+                </text>
+            </switch>
+        </g>
+        <rect x="590" y="105" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="591.5" y="117.5">
+                Latest Posts
+            </text>
+        </g>
+        <rect x="720" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="721.5" y="67.5">
+                RSS
+            </text>
+        </g>
+        <rect x="590" y="135" width="190" height="140" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 188px; height: 1px; padding-top: 137px; margin-left: 592px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ...
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="592" y="149" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, con...
+                </text>
+            </switch>
+        </g>
+        <rect x="740" y="275" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" font-size="12px">
+            <text x="741.5" y="287.5">
+                More
+            </text>
+        </g>
+        <rect x="740" y="295" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-anchor="end" font-size="12px">
+            <text x="767.5" y="307.5">
+                Yesterday
+            </text>
+        </g>
+        <rect x="585" y="315" width="190" height="140" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 188px; height: 1px; padding-top: 317px; margin-left: 587px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ...
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="587" y="329" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, con...
+                </text>
+            </switch>
+        </g>
+        <rect x="735" y="455" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" font-size="12px">
+            <text x="736.5" y="467.5">
+                More
+            </text>
+        </g>
+        <rect x="735" y="475" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-anchor="end" font-size="12px">
+            <text x="762.5" y="487.5">
+                1 week ago
+            </text>
+        </g>
+        <rect x="0" y="0" width="40" height="40" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 0 0 L 40 40 M 40 0 L 0 40" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="5" width="40" height="40" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="19.5" y="17.5">
+                Blog
+            </text>
+            <text x="19.5" y="31.5">
+                Logo
+            </text>
+        </g>
+        <rect x="80" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="81.5" y="67.5">
+                Blog's Main Topic 1
+            </text>
+        </g>
+        <rect x="200" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="201.5" y="67.5">
+                Blog's Main Topic 2
+            </text>
+        </g>
+        <rect x="320" y="55" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="321.5" y="67.5">
+                Blog's Main Topic 3
+            </text>
+        </g>
+        <rect x="80" y="355" width="360" height="200" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 80 355 L 440 555 M 440 355 L 80 555" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="80" y="355" width="360" height="200" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#CCCCCC" font-family="Helvetica" text-anchor="middle" font-size="36px">
+            <text x="259.5" y="447.5">
+                Article
+            </text>
+            <text x="259.5" y="490.5">
+                Picture
+            </text>
+        </g>
+        <rect x="0" y="605" width="570" height="480" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 0 605 L 570 1085 M 570 605 L 0 1085" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="605" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="617.5">
+                Article 2
+            </text>
+        </g>
+        <rect x="0" y="635" width="530" height="250" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 528px; height: 1px; padding-top: 637px; margin-left: 2px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <br/>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="2" y="649" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididu...
+                </text>
+            </switch>
+        </g>
+        <rect x="80" y="855" width="360" height="200" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 80 855 L 440 1055 M 440 855 L 80 1055" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="80" y="855" width="360" height="200" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#CCCCCC" font-family="Helvetica" text-anchor="middle" font-size="36px">
+            <text x="259.5" y="947.5">
+                Article
+            </text>
+            <text x="259.5" y="990.5">
+                Picture
+            </text>
+        </g>
+        <rect x="0" y="1105" width="570" height="480" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 0 1105 L 570 1585 M 570 1105 L 0 1585" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="1105" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="1117.5">
+                Article 3
+            </text>
+        </g>
+        <rect x="0" y="1135" width="530" height="250" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 528px; height: 1px; padding-top: 1137px; margin-left: 2px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <br/>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="2" y="1149" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididu...
+                </text>
+            </switch>
+        </g>
+        <rect x="80" y="1355" width="360" height="200" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 80 1355 L 440 1555 M 440 1355 L 80 1555" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="80" y="1355" width="360" height="200" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#CCCCCC" font-family="Helvetica" text-anchor="middle" font-size="36px">
+            <text x="259.5" y="1447.5">
+                Article
+            </text>
+            <text x="259.5" y="1490.5">
+                Picture
+            </text>
+        </g>
+        <path d="M 490 573.3 L 493.64 573.3 L 494.75 570 L 495.86 573.3 L 499.5 573.3 L 496.6 575.51 L 497.75 579 L 494.75 576.84 L 491.75 579 L 492.9 575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 505 573.3 L 508.64 573.3 L 509.75 570 L 510.86 573.3 L 514.5 573.3 L 511.6 575.51 L 512.75 579 L 509.75 576.84 L 506.75 579 L 507.9 575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 520 573.3 L 523.64 573.3 L 524.75 570 L 525.86 573.3 L 529.5 573.3 L 526.6 575.51 L 527.75 579 L 524.75 576.84 L 521.75 579 L 522.9 575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 535 573.3 L 538.64 573.3 L 539.75 570 L 540.86 573.3 L 544.5 573.3 L 541.6 575.51 L 542.75 579 L 539.75 576.84 L 536.75 579 L 537.9 575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 550 573.3 L 553.64 573.3 L 554.75 570 L 555.86 573.3 L 559.5 573.3 L 556.6 575.51 L 557.75 579 L 554.75 576.84 L 551.75 579 L 552.9 575.51 Z" fill="#ffffff" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="390" y="565" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="391.5" y="577.5">
+                Rate this article
+            </text>
+        </g>
+        <path d="M 490 1073.3 L 493.64 1073.3 L 494.75 1070 L 495.86 1073.3 L 499.5 1073.3 L 496.6 1075.51 L 497.75 1079 L 494.75 1076.84 L 491.75 1079 L 492.9 1075.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 505 1073.3 L 508.64 1073.3 L 509.75 1070 L 510.86 1073.3 L 514.5 1073.3 L 511.6 1075.51 L 512.75 1079 L 509.75 1076.84 L 506.75 1079 L 507.9 1075.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 520 1073.3 L 523.64 1073.3 L 524.75 1070 L 525.86 1073.3 L 529.5 1073.3 L 526.6 1075.51 L 527.75 1079 L 524.75 1076.84 L 521.75 1079 L 522.9 1075.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 535 1073.3 L 538.64 1073.3 L 539.75 1070 L 540.86 1073.3 L 544.5 1073.3 L 541.6 1075.51 L 542.75 1079 L 539.75 1076.84 L 536.75 1079 L 537.9 1075.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 550 1073.3 L 553.64 1073.3 L 554.75 1070 L 555.86 1073.3 L 559.5 1073.3 L 556.6 1075.51 L 557.75 1079 L 554.75 1076.84 L 551.75 1079 L 552.9 1075.51 Z" fill="#ffffff" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="390" y="1065" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="391.5" y="1077.5">
+                Rate this article
+            </text>
+        </g>
+        <path d="M 490 1573.3 L 493.64 1573.3 L 494.75 1570 L 495.86 1573.3 L 499.5 1573.3 L 496.6 1575.51 L 497.75 1579 L 494.75 1576.84 L 491.75 1579 L 492.9 1575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 505 1573.3 L 508.64 1573.3 L 509.75 1570 L 510.86 1573.3 L 514.5 1573.3 L 511.6 1575.51 L 512.75 1579 L 509.75 1576.84 L 506.75 1579 L 507.9 1575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 520 1573.3 L 523.64 1573.3 L 524.75 1570 L 525.86 1573.3 L 529.5 1573.3 L 526.6 1575.51 L 527.75 1579 L 524.75 1576.84 L 521.75 1579 L 522.9 1575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 535 1573.3 L 538.64 1573.3 L 539.75 1570 L 540.86 1573.3 L 544.5 1573.3 L 541.6 1575.51 L 542.75 1579 L 539.75 1576.84 L 536.75 1579 L 537.9 1575.51 Z" fill="#ffff00" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 550 1573.3 L 553.64 1573.3 L 554.75 1570 L 555.86 1573.3 L 559.5 1573.3 L 556.6 1575.51 L 557.75 1579 L 554.75 1576.84 L 551.75 1579 L 552.9 1575.51 Z" fill="#ffffff" stroke="#999999" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="390" y="1565" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="391.5" y="1577.5">
+                Rate this article
+            </text>
+        </g>
+        <rect x="0" y="565" width="210" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="577.5">
+                Tags: Tag1 Tag2 Tag3 Tag4
+            </text>
+        </g>
+        <rect x="0" y="1065" width="210" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="1077.5">
+                Tags: Tag1 Tag2 Tag3 Tag4
+            </text>
+        </g>
+        <rect x="0" y="1565" width="210" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="1.5" y="1577.5">
+                Tags: Tag1 Tag2 Tag3 Tag4
+            </text>
+        </g>
+        <rect x="580" y="575" width="200" height="150" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 580 575 L 780 725 M 780 575 L 580 725" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="590" y="555" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" font-size="12px">
+            <text x="591.5" y="567.5">
+                Me on Twitter
+            </text>
+        </g>
+        <rect x="590" y="585" width="190" height="40" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 188px; height: 1px; padding-top: 587px; margin-left: 592px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="592" y="599" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, con...
+                </text>
+            </switch>
+        </g>
+        <rect x="740" y="625" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-anchor="end" font-size="12px">
+            <text x="767.5" y="637.5">
+                Yesterday
+            </text>
+        </g>
+        <rect x="580" y="745" width="200" height="200" fill="#ffffff" stroke="#cccccc" pointer-events="all"/>
+        <path d="M 580 745 L 780 945 M 780 745 L 580 945" fill="none" stroke="#cccccc" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="580" y="745" width="200" height="200" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#CCCCCC" font-family="Helvetica" text-anchor="middle" font-size="36px">
+            <text x="679.5" y="859">
+                Tag Cloud
+            </text>
+        </g>
+        <rect x="590" y="655" width="190" height="40" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 188px; height: 1px; padding-top: 657px; margin-left: 592px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: left; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="592" y="669" fill="#000000" font-family="Helvetica" font-size="12px">
+                    Lorem ipsum dolor sit amet, con...
+                </text>
+            </switch>
+        </g>
+        <rect x="740" y="695" width="30" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="#000000" font-family="Helvetica" text-anchor="end" font-size="12px">
+            <text x="767.5" y="707.5">
+                1 Week ago
+            </text>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://desk.draw.io/support/solutions/articles/16000042487" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Viewer does not support full SVG 1.1
+            </text>
+        </a>
+    </switch>
+</svg>
+
+    <figcaption>
+        <em>test</em>
+    </figcaption>
+</figure></p>
+<h5 id="discontinue-definition">Discontinue Definition</h5>
+<h3 id="konditionssimulation">Konditionssimulation</h3>
+<h4 id="geschäftsfälle">Geschäftsfälle</h4>
+<h4 id="veränderung-von-konditionen">Veränderung von Konditionen</h4>
+<h4 id="berechnung-kalkulation">Berechnung (Kalkulation)</h4>
+<h4 id="vergleiche">Vergleiche</h4>
+<h3 id="funktionsbeschreibung">Funktionsbeschreibung</h3>
+<h2 id="technische-anforderungen">Technische Anforderungen</h2>
+<h3 id="zugriffsmöglichkeiten">Zugriffsmöglichkeiten</h3>
+
+    </div>
+</article>
+
+
+
+
+
+<script async src="/assets/js/mermaid.min.js"></script>
+
+
+
+
+
+        </div>
+    </main>
+
+    <div class="container">
+        <div class="footer">
+            <footer>
+    
+
+
+    
+    <div class="social">
+        <a title="Check my code" href="https://github.com/QualmandDriven">
+            <i class="fab fa-github"></i>
+        </a>
+        <a title="Follow me" href="https://www.xing.com/profile/Alexander_Schollwoeck">
+            <i class="fab fa-xing"></i>
+        </a>
+        <a title="Mail me" href="mailto:alexander@schollwoeck.de">
+            <i class="fas fa-envelope"></i>
+        </a>
+
+        <a title="RSS" href="/posts/index.xml">
+            <i class="fas fa-rss"></i>
+        </a>
+    
+        <div class="copyright">
+            
+            <span>&copy; 2021, A. Schollwöck
+            </span>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+</body>
+</html>
