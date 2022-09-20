@@ -34,7 +34,7 @@ Usually there is enough motivation to start them and usually I get them to produ
 I will blog about those here as well in the future.
 
 Now, those are some conflicting statements but I would like to keep up the motivation and not waste it.
-I know I don't have to forece myself and I can take time off if I want to - nonetheless I want to feel productive overall.
+I know I don't have to force myself and I can take time off if I want to - nonetheless I want to feel productive overall.
 And I think I am not as productive as I would like, in fact I know it.
 
 Coming back to Jordan, I started with a weekly plan - not too much, not too little with breaks in between.
@@ -49,7 +49,7 @@ It respects my hours I put into my day job and also considers differnt topics wh
 I hope this helps to keep a bit of disciplin up. Looking at a plan does always feel different than having it only in your head and telling yourself (Jordan actually talked about this as well but I knew before, too :)).
 
 If I don't stick 100% to the plan - it's fine.
-Sometimes I'm not up to it, maybe because my day job was really stressful that day and I can't think anymore and feel really tired or ... life happens, e.g. friends come over and short term plans to meet with friends or family somewhere.
+Sometimes I'm not up to it, maybe because my day job was really stressful that day and I can't think anymore and feel really tired or ... life happens, e.g. friends come over or short term plans to meet with friends or family somewhere.
 
 So yesterday (Monday) was a workout day and I did 60 burpees (the goal was 100 but well, I think it's a good start). Today on my plan was 30 minutes of writing (I think I am now at 40 minutes) and afterwards I might do some programming for 30 minutes until I go to bed and read some news.
 
