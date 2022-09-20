@@ -123,14 +123,17 @@ main {
 }
 
 .footer {
-    display: none;
+    color: #222;
+    border: solid #ddd;
+    border-width: 1px 0 0 0;
+    /* display: none; */
 }
 
-@media(max-width: 549px) {
+/* @media(max-width: 549px) {
     .footer {
         display: block;
     }
-}
+} */
 
 .sidebar-item {
     padding-top: 1rem;
