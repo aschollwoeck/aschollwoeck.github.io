@@ -107,12 +107,12 @@ Ausgangssituation Vertriebskonditionen treten in unterschiedlichen Formen auf. D
 </span>
 
     <span>
-        <i class="fas fa-inbox"></i>&nbsp;2781 words
+        <i class="fas fa-inbox"></i>&nbsp;3426 words
     </span>
 
 
     <span>
-        <i class="far fa-clock"></i>&nbsp;14 minutes 
+        <i class="far fa-clock"></i>&nbsp;17 minutes 
     </span>
 
 <span>
@@ -153,6 +153,9 @@ Ausgangssituation Vertriebskonditionen treten in unterschiedlichen Formen auf. D
     <li><a href="#grundlagen">Grundlagen</a>
       <ul>
         <li><a href="#konditionen">Konditionen</a></li>
+        <li><a href="#bedingungen">Bedingungen</a></li>
+        <li><a href="#zugriffsfolge">Zugriffsfolge</a></li>
+        <li><a href="#kalkulationsschema--rechenschema">Kalkulationsschema / Rechenschema</a></li>
       </ul>
     </li>
     <li><a href="#fachliche-anforderungen">Fachliche Anforderungen</a>
@@ -239,10 +242,10 @@ Dadurch wird es möglich sein geplante Veränderungen im vorhinein für alle Ges
 <p>Eine Kalkulation ist eine Art Rechenvorschrift, welche Arten von Werten verwendet werden und wie diese miteinander verrechnet werden sollen. In eine Angebotskalkulation gibt es bspw. die Arten</p>
 <ul>
 <li>Preis</li>
-<li>Abschlag / Rabatt / Mark down</li>
+<li>Abschlag / Rabatt / Discount</li>
 <li>Aufschlag / Mark up.</li>
 </ul>
-<p>Pro Art wird eine Konditions<strong>art</strong> definiert und für jede Art werden Bedingungen für Konditionen definiert. Pro Konditionsart und Kombination aus Bedingungen kann es genau 0 oder 1 Ergebnis geben.</p>
+<p>Pro Art wird eine Konditions<strong>art</strong> definiert und für jede Art werden Bedingungen für Konditionen definiert.</p>
 <p>Eine Kondition besitzt die Eigenschaften:
 <figure>
     <table>
@@ -293,9 +296,11 @@ Dadurch wird es möglich sein geplante Veränderungen im vorhinein für alle Ges
 </table>
 
     <figcaption>
-        <em>Kondition-Modell</em>
+        <em>Datenmodell: Kondition</em>
     </figcaption>
 </figure></p>
+<h3 id="bedingungen">Bedingungen</h3>
+<p>Es wurde bereits von Bedingungen gesprochen welche immer an eine Kondition geknüpft sind und angibt, wann diese verwendet werden darf / kann / soll. Der Aufbau einer Bedingung besteht aus einem festen Anteil, welcher bei jeder Bedingung gleich ist und einen dynamischen Anteil. Dieser dynamische Anteil kann mit unterschiedlichsten Feldern angereicht werden, welche Teil einer Bedingung sein sollen.</p>
 <p>Das Modell für eine Bedingung pro Kondition:
 <figure>
     <table>
@@ -346,10 +351,62 @@ Dadurch wird es möglich sein geplante Veränderungen im vorhinein für alle Ges
 </table>
 
     <figcaption>
-        <em>Konditionsbedingung-Modell</em>
+        <em>Datenmodell: Bedingung</em>
     </figcaption>
 </figure></p>
-<p>Da es pro Konditionsart unterschiedliche Bedingungen geben kann muss diesen eine Gewichtung verliehen werden. Ansonsten könnte nicht unterschieden werden, wenn für eine Anzahl an Parametern mehrere Bedingungen erfüllt werden würde, welche Kondition verwendet werden soll. Deshalb wird den Bedingungen eine Zugriffsreihenfolge verliehen, d.h. welche Bedingungen vor anderen geprüft werden sollen.</p>
+<p>Wichtig ist die Eindeutigkeit der Konditionen. Um diese zu gewährleistungen müssen folgende Grundvoraussetzugnen beachtet werden:</p>
+<ul>
+<li>pro Konditionsart und Kombination aus Bedingungen kann es genau 0 oder 1 Ergebnis geben.</li>
+<li>Eine Kondition mit den selben Bedingungen kann nur 1-mal vorhanden sein<br>
+Ist der dynamische Anteil identisch können diese bspw. durch Änderung des Gültigkeitsdatums gepflegt werden.</li>
+</ul>
+<p>In folgendem Beispiel wird verdeutlicht, wie unterschiedliche Listenpreise für ein Material gepflegt werden können mit Hilfe des Gültigkeitszeitraumes:</p>
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Kondart</th>
+<th>Bedingung #1</th>
+<th>Bedingung #2</th>
+<th>Wert</th>
+<th>Von</th>
+<th>Bis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PR00</td>
+<td>Matnr = 12AB3</td>
+<td>Kdgrp = A3</td>
+<td>950€</td>
+<td>2020-01-01</td>
+<td>2021-12-31</td>
+</tr>
+<tr>
+<td>PR00</td>
+<td>Matnr = 12AB3</td>
+<td></td>
+<td>1250€</td>
+<td><strong>2020-07-01</strong></td>
+<td><strong>2021-06-30</strong></td>
+</tr>
+<tr>
+<td>PR00</td>
+<td>Matnr = 12AB3</td>
+<td></td>
+<td>1000€</td>
+<td><strong>2019-07-01</strong></td>
+<td><strong>2020-06-30</strong></td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Pflege Konditionssätze Beispiel</em>
+    </figcaption>
+</figure>
+<h3 id="zugriffsfolge">Zugriffsfolge</h3>
+<p>Da es pro Konditionsart unterschiedliche Bedingungen geben kann muss diesen eine Gewichtung verliehen werden. Ansonsten könnte nicht unterschieden werden, wenn für eine Anzahl an Parametern mehrere Bedingungen erfüllt werden würde, welche Kondition verwendet werden soll. Deshalb wird den Bedingungen eine Zugriffs(reihen)folge verliehen, d.h. welche Bedingungen vor anderen geprüft werden sollen.</p>
 <p>Ein Beispiel von Zugriffsfolgen für eine Konditionsart &ldquo;PR00 - Listenpreis&rdquo; könnte sein:
 <figure>
     <table>
@@ -378,7 +435,90 @@ Dadurch wird es möglich sein geplante Veränderungen im vorhinein für alle Ges
         <em>Zugriffsfolgen-Beispiel</em>
     </figcaption>
 </figure></p>
+<p>Die Zugriffsfolgen werden von &ldquo;oben nach unten&rdquo; geprüft und dementsprechend muss auch die Reihenfolge festgelegt werden. Die Reihenfolge richtet sich von &ldquo;spezifisch zu generell&rdquo;. D.h. Bedingungen welche spezifischer sind müssen vor generelleren Bedingungen geprüft werden, da ansonsten evtl. eine spezifische Bedingung nicht mehr erreicht werden kann.</p>
+<p>In oben dargestellten Beispiel macht es keinen Sinn erst die Bedingung &ldquo;Matnr&rdquo; vor &ldquo;Matnr + Kdnr&rdquo; zu prüfen, da immer ein Preis vorhanden sein soll und bei bestimmten Situationen etwas spezifischeres gepflegt sein kann.</p>
 <p><a href="https://help.sap.com/viewer/14ad85ff93b342afb770eb468a9fd898/6.00.31/de-DE/5e49b753128eb44ce10000000a174cb4.html" target="_blank">Konditionen und Preisfindung</a></p>
+<h3 id="kalkulationsschema--rechenschema">Kalkulationsschema / Rechenschema</h3>
+<p>Die in den vorherigen Abschnitten definierten Modelle (Kondition, Bedingung und Zugriffsfolge) beinhalten erstmal nur Daten. Damit diesen Daten auch Sinnhaftigkeit verliehen wird muss ein Zusammenhang hergestellt werden. Dieser Zusammenhang wird mit Hilfe eines Schemas hergestellt. In einem Schema wird zuerst definiert welche Kondition(sarten) und damit deren Bedingungen und Zugriffsfolgen verwendet werden.</p>
+<p>Ein wichtiger Fokus liegt hierbei auf den Bedingungen. Da eine Bedingung einen dynamischen Anteil besitzt muss dieser dynamische Anteil auch verwendet werden können. D.h. die Felder der Bedingungen müssen auch dem Schema bekannt sein, ansonsten können diese nicht als Parameter für eine Konditionsfindung verwendet werden.
+Dies kann auch eine bewusste Entscheidung sein um etwas bestimmte Bedingungen in bestimmten Schemata nicht zu verwenden, was allerdings vorher genau festgelegt werden sollte um Verwirrung zu vermeiden.</p>
+<p>Nur Bedingungen prüfen und Konditionen auslesen reicht allerdings nicht. Es muss auch festgelegt werden, wie diese ermittelten Werte angewendet werden sollen. Betrachten wir ein Angebot, dann wird in diesem bspw. die Preisermittlung über ein solches Schema gesteuert. Nachdem Preis, Aufschläge, Abschläge, etc. ermittelt wurden muss auch definiert werden wie diese Werte miteinander verrechnet werden sollen.</p>
+<p>Das bedeutet, dass das Schema die eigentliche Intelligenz und Logik besitzt. Die Schemen sollten auch einigermaßen stabil sein und die grundsätzliche Logik nicht zu sehr geändert werden, da die Konditionen und die Schemata in Verbindung gebracht werden. Änderungen in den Modellen haben dadurch direkten Einfluss aufeinander.</p>
+<p>Je nach Einsatzgebiet der Schemata verfügen diese über bestimmte Operationen. Häufig wird hier von Rechenoperationen gesprochen, aber auch Zwischenergebnisse oder Operationen unabhängig von Berechnungen können und müssen möglich sein.</p>
+<p>Ein einfaches Beispiel einer Angebotsrechnung mittels eines definierten &ldquo;Kalkulationsschemas&rdquo;:
+<figure>
+    <table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matnr</td>
+<td>12AB3</td>
+</tr>
+<tr>
+<td>Kdnr</td>
+<td>1234</td>
+</tr>
+<tr>
+<td>VKORG</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>VTWEG</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Werk</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<table>
+<thead>
+<tr>
+<th>Funktion</th>
+<th>Konditionsart</th>
+<th>Wert</th>
+<th>Kommentar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ermittlung</td>
+<td>PR00</td>
+<td>1000€</td>
+<td>Listenpreisermittlung</td>
+</tr>
+<tr>
+<td>Ergebnis</td>
+<td>PB00</td>
+<td>1000€</td>
+<td>Übernahme als Bruttopreis</td>
+</tr>
+<tr>
+<td>Ermittlung</td>
+<td>ZR00</td>
+<td>10%</td>
+<td>Rabattermittlung</td>
+</tr>
+<tr>
+<td>Ergebnis</td>
+<td>PN00</td>
+<td>900€</td>
+<td>Errechnung Nettopreis</td>
+</tr>
+</tbody>
+</table>
+
+    <figcaption>
+        <em>Kalkulationsschema Beispiel</em>
+    </figcaption>
+</figure></p>
 <h2 id="fachliche-anforderungen">Fachliche Anforderungen</h2>
 <p>Die Anforderungen trennen sich in einen Verwaltungs- und einen Simulationsteil. Die Grundlagen werden für beide Teile benötigt und ein Austausch der Anteile untereinander soll ebenfalls möglich sein.</p>
 <h3 id="konditionsverwaltung">Konditionsverwaltung</h3>
@@ -496,6 +636,13 @@ stateDiagram-v2
         <em>Definition: Zustandsdiagramm</em>
     </figcaption>
 </figure>
+<figure>
+    <p><svg id="mermaid-1614498178804" width="563.484375" xmlns="http://www.w3.org/2000/svg" class="statediagram" height="184" viewBox="0 0 563.484375 184"><style>#mermaid-1614498178804{font-family:&ldquo;trebuchet ms&rdquo;,verdana,arial;font-size:16px;fill:#333;}#mermaid-1614498178804 .error-icon{fill:#552222;}#mermaid-1614498178804 .error-text{fill:#552222;stroke:#552222;}#mermaid-1614498178804 .edge-thickness-normal{stroke-width:2px;}#mermaid-1614498178804 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1614498178804 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1614498178804 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1614498178804 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1614498178804 .marker{fill:#333333;}#mermaid-1614498178804 .marker.cross{stroke:#333333;}#mermaid-1614498178804 svg{font-family:&ldquo;trebuchet ms&rdquo;,verdana,arial;font-size:16px;}#mermaid-1614498178804 g.stateGroup text{fill:#9370DB;stroke:none;font-size:10px;}#mermaid-1614498178804 g.stateGroup text{fill:#333;stroke:none;font-size:10px;}#mermaid-1614498178804 g.stateGroup .state-title{font-weight:bolder;fill:black;}#mermaid-1614498178804 g.stateGroup rect{fill:#ECECFF;stroke:#9370DB;}#mermaid-1614498178804 g.stateGroup line{stroke:#333333;stroke-width:1;}#mermaid-1614498178804 .transition{stroke:#333333;stroke-width:1;fill:none;}#mermaid-1614498178804 .stateGroup .composit{fill:white;border-bottom:1px;}#mermaid-1614498178804 .stateGroup .alt-composit{fill:#e0e0e0;border-bottom:1px;}#mermaid-1614498178804 .state-note{stroke:#aaaa33;fill:#fff5ad;}#mermaid-1614498178804 .state-note text{fill:black;stroke:none;font-size:10px;}#mermaid-1614498178804 .stateLabel .box{stroke:none;stroke-width:0;fill:#ECECFF;opacity:0.5;}#mermaid-1614498178804 .edgeLabel .label rect{fill:hsl(80,100%,96.2745098039%);opacity:0.5;}#mermaid-1614498178804 .edgeLabel .label text{fill:rgb(9.5000000001,9.5000000001,9.5000000001);}#mermaid-1614498178804 .label div .edgeLabel{color:rgb(9.5000000001,9.5000000001,9.5000000001);}#mermaid-1614498178804 .stateLabel text{fill:black;font-size:10px;font-weight:bold;}#mermaid-1614498178804 .node circle.state-start{fill:#333333;stroke:black;}#mermaid-1614498178804 .node circle.state-end{fill:hsl(240,60%,86.2745098039%);stroke:white;stroke-width:1.5;}#mermaid-1614498178804 .end-state-inner{fill:white;stroke-width:1.5;}#mermaid-1614498178804 .node rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-1614498178804 #statediagram-barbEnd{fill:#333333;}#mermaid-1614498178804 .statediagram-cluster rect{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-1614498178804 .cluster-label,#mermaid-1614498178804 .nodeLabel{color:#333;}#mermaid-1614498178804 .statediagram-cluster rect.outer{rx:5px;ry:5px;}#mermaid-1614498178804 .statediagram-state .divider{stroke:#9370DB;}#mermaid-1614498178804 .statediagram-state .title-state{rx:5px;ry:5px;}#mermaid-1614498178804 .statediagram-cluster.statediagram-cluster .inner{fill:white;}#mermaid-1614498178804 .statediagram-cluster.statediagram-cluster-alt .inner{fill:#e0e0e0;}#mermaid-1614498178804 .statediagram-cluster .inner{rx:0;ry:0;}#mermaid-1614498178804 .statediagram-state rect.basic{rx:5px;ry:5px;}#mermaid-1614498178804 .statediagram-state rect.divider{stroke-dasharray:10,10;fill:#efefef;}#mermaid-1614498178804 .note-edge{stroke-dasharray:5;}#mermaid-1614498178804 .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid-1614498178804 .statediagram-note rect{fill:#fff5ad;stroke:#aaaa33;stroke-width:1px;rx:0;ry:0;}#mermaid-1614498178804 .statediagram-note text{fill:black;}#mermaid-1614498178804 .statediagram-note .nodeLabel{color:black;}#mermaid-1614498178804 #dependencyStart,#mermaid-1614498178804 #dependencyEnd{fill:#333333;stroke:#333333;stroke-width:1;}#mermaid-1614498178804:root{&ndash;mermaid-font-family:&ldquo;trebuchet ms&rdquo;,verdana,arial;}#mermaid-1614498178804 stateDiagram{fill:apa;}</style><g><defs><marker id="statediagram-barbEnd" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"/></marker></defs><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M281.7421875,22L281.7421875,26.166666666666668C281.7421875,30.333333333333332,281.7421875,38.666666666666664,281.7421875,47C281.7421875,55.333333333333336,281.7421875,63.666666666666664,281.7421875,67.83333333333333L281.7421875,72" id="edge0" class=" edge-thickness-normal transition" marker-end="url(#statediagram-barbEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><rect rx="0" ry="0" width="0" height="0"/><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="root_start" transform="translate(281.7421875, 15)"><circle class="state-start" r="7" width="14" height="14"/></g><g class="root" transform="translate(0, 64)"><g class="clusters"><g class="statediagram-state statediagram-cluster" id="Definition"><rect class="outer" x="8" y="8" width="547.484375" height="104"/><g class="cluster-label" transform="translate(246.4609375, 8)"><foreignObject width="70.5625" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="nodeLabel">Definition</span></div></foreignObject></g><rect class="inner" x="8" y="26" width="547.484375" height="82"/></g></g><g class="edgePaths"><path d="M47,60L51.166666666666664,60C55.333333333333336,60,63.666666666666664,60,72,60C80.33333333333333,60,88.66666666666667,60,92.83333333333333,60L97,60" id="edge1" class=" edge-thickness-normal transition" marker-end="url(#statediagram-barbEnd)"/><path d="M142.84375,60L149.38932291666666,60C155.93489583333334,60,169.02604166666666,60,182.1171875,60C195.20833333333334,60,208.29947916666666,60,214.84505208333334,60L221.390625,60" id="edge2" class=" edge-thickness-normal transition" marker-end="url(#statediagram-barbEnd)"/><path d="M286.125,60L294.625,60C303.125,60,320.125,60,337.125,60C354.125,60,371.125,60,379.625,60L388.125,60" id="edge3" class=" edge-thickness-normal transition" marker-end="url(#statediagram-barbEnd)"/><path d="M466.484375,60L470.6510416666667,60C474.8177083333333,60,483.1510416666667,60,491.484375,60C499.8177083333333,60,508.1510416666667,60,512.3177083333334,60L516.484375,60" id="edge4" class=" edge-thickness-normal transition" marker-end="url(#statediagram-barbEnd)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><rect rx="0" ry="0" width="0" height="0"/><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(182.1171875, 60)"><g class="label" transform="translate(-14.2734375, -9.5)"><rect rx="0" ry="0" width="28.546875" height="19"/><foreignObject width="28.546875" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">edit</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(337.125, 60)"><g class="label" transform="translate(-26, -9.5)"><rect rx="0" ry="0" width="52" height="19"/><foreignObject width="52" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">release</span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><rect rx="0" ry="0" width="0" height="0"/><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="Definition_start" transform="translate(40, 60)"><circle class="state-start" r="7" width="14" height="14"/></g><g class="node statediagram-state" id="New" transform="translate(119.921875, 60)"><rect class="basic label-container" x="-22.921875" y="-17" width="45.84375" height="34"/><g class="label" transform="translate(-15.421875, -9.5)"><foreignObject width="30.84375" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="nodeLabel">New</span></div></foreignObject></g></g><g class="node statediagram-state" id="Editing" transform="translate(253.7578125, 60)"><rect class="basic label-container" x="-32.3671875" y="-17" width="64.734375" height="34"/><g class="label" transform="translate(-24.8671875, -9.5)"><foreignObject width="49.734375" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="nodeLabel">Editing</span></div></foreignObject></g></g><g class="node statediagram-state" id="Released" transform="translate(427.3046875, 60)"><rect class="basic label-container" x="-39.1796875" y="-17" width="78.359375" height="34"/><g class="label" transform="translate(-31.6796875, -9.5)"><foreignObject width="63.359375" height="19"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="nodeLabel">Released</span></div></foreignObject></g></g><g class="node default" id="Definition_end" transform="translate(523.484375, 60)"><circle class="state-start" r="7" width="14" height="14"/><circle class="state-end" r="5" width="10" height="10"/></g></g></g></g></g></g></svg></p>
+
+    <figcaption>
+        <em>Definition: Zustandsdiagramm</em>
+    </figcaption>
+</figure>
 <p>In jedem Zustand sind Aktionen des Nutzers oder Systems notwendig:</p>
 <ul>
 <li>New:
@@ -570,6 +717,119 @@ Kondition werden eingefroren.</li>
 
     <figcaption>
         <em>Felder für Fragebaum</em>
+    </figcaption>
+</figure>
+<figure>
+    <svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="831px" height="389px" viewBox="-0.5 -0.5 831 389" content="&lt;mxfile host=&quot;2df810d8-f1fe-42a8-af15-768b5c83aa40&quot; modified=&quot;2021-02-23T19:44:13.532Z&quot; agent=&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.2 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36&quot; etag=&quot;yvDfsxyhMo1h-AwnwuDf&quot; version=&quot;14.2.4&quot; type=&quot;embed&quot;&gt;&lt;diagram id=&quot;-8ASoFGtcusVafRYhSpK&quot; name=&quot;Page-1&quot;&gt;7Vhdj+IgFP01fW9LW/VRndnZh91kEzeZZ2yvLRlaDMVR59cvtNAvdHSrMZlkeDD0wL3AOQdKddAyP7xwvM1+swSo47vJwUFPju9H0Uz+KuBYA6GvgZSTpIa8FliRD9Cgq9EdSaDsdRSMUUG2fTBmRQGx6GGYc7bvd9sw2h91i1OwgFWMqY2+kkRkNTr1Jy3+E0iamZE9s+Acm856JWWGE7bvQOjZQUvOmKhr+WEJVHFneKnjfpxpbSbGoRDXBISojnjHdKcXpycmjma1nO2KBFSA66DFPiMCVlscq9a9lFdimcipfPJktRScvcGSUcaraBRVRbZsWCE6eF1UhKFAZU8pLktdL99AxJl+2BBKO9FuVSSupw9cwOEsB17DrHQksBwEP8ou+452SAuSdXQLNYa1XdImtGVUVjSpZwgO/odg71qCje18Tc2rmXageuM423F4UaFP0xaYF2k1ZBDahHpr7IHfZd27kV0TYDat3uuesX6H/Qbrsh/dg/3QYv8vHISlgFBgj2ZMSVrIeiyXCZKjhSKByCNgrhtykiQq/KRe/S1jeTd0YXNqr7iu97RY2ntlU5X76BFEAz2QrUdwQg7/HnJEY+XoU1WwAga8auiest2B7IZJTbY/eSDZk8snDxTJXL0PFWPq5CVxn/Y6ABLrdXiRAA4UC/Lejzu1HB36hxGZsSEODVxqncUl2/EYdFT3BTdINLS7lUhgnoKwEkla8LHTbas6lOcnHPiDcZA7EKvO2ErXkHWdmlNLzV94ra5VQ0mlWHWL9DOU5AOvqyZ37PnmdK9SOll7gbmwPWoT3mCPq90++3b7eLePMKQZ6asZcvYgQ0betyEfa0j/SxoyulXBqw1pX74eaMjOhSf85FPrRt96s77d0HSkb/3oQqLRvpWP7ed93b39jwQ9/wM=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="0" y="0" width="830" height="50" fill="#000000" stroke="#666666" pointer-events="all"/>
+        <rect x="110" y="120" width="120" height="60" rx="9" ry="9" fill="none" stroke="none" pointer-events="all"/>
+        <path d="M 112.13 177.63 C 112.13 177.63 112.13 177.63 112.13 177.63 M 112.13 177.63 C 112.13 177.63 112.13 177.63 112.13 177.63 M 119.67 173.87 C 118.35 173.03 116.85 170.53 113.22 168.17 M 119.74 174.15 C 118.24 172.65 116.82 170.56 113.39 167.98 M 129.46 173.19 C 125.94 171.49 121.5 167.89 113.17 154.65 M 130.48 173.34 C 126.99 169.66 124.4 166.69 114.39 156.55 M 143.31 173.22 C 130.82 162.77 122.62 153.36 115.36 143.75 M 143.13 175.08 C 133.33 164.41 122.62 152.78 113.15 144.31 M 154.65 174.62 C 142.44 163.43 131.59 152.08 114.21 133.68 M 154.36 174.27 C 140.56 161.04 125.27 145.69 114.41 133.64 M 167.47 175.27 C 151.48 161.39 138.47 143.24 113.99 122.22 M 165.56 173.94 C 152.07 162.08 139.92 149.18 113.8 121.02 M 175.25 173.17 C 159.99 158 138.63 137.35 121.05 119.86 M 176.8 175.53 C 162.74 161.63 148.86 145.83 121.25 118.9 M 187.67 173.11 C 171.55 157.12 152.7 139.24 133.82 119.77 M 188.58 174.57 C 166.92 153.47 147.1 133.16 131.97 118.72 M 200.57 176.69 C 179.27 154.68 155.62 130.51 144.3 119.33 M 198.81 175.66 C 183.95 159.07 168.02 141.73 142.98 117.39 M 210.02 176.36 C 187.07 153.59 166.83 129.48 154.21 116.28 M 211.78 175.52 C 192.8 156 173.99 137.57 154.24 118.47 M 224.35 175.46 C 206.88 160.19 188.83 140.92 165.49 119.18 M 225.34 176.06 C 206.1 158.65 187.15 139.65 166.12 117.59 M 233.52 173.55 C 214.75 155.88 198.3 138.76 178.94 118.07 M 231.11 172.72 C 217.18 156.68 200.94 142.78 177.09 118.22 M 233.4 162.79 C 214.16 143.87 199.7 131.04 189.45 119.74 M 231.91 161.76 C 216.14 145.3 200.47 130.29 189.93 119.78 M 231.88 149.93 C 224.29 140.29 212.94 130.52 200.21 117.87 M 230.74 149.34 C 220.08 139.95 209.96 129.76 200.93 118.89 M 232.64 140.16 C 225.71 130.73 218.96 123.02 209.88 120.25 M 231.65 140.35 C 227.65 135.14 222.65 129.36 212.08 119.58 M 232.29 126.96 C 228.8 125.42 228.69 124.04 223.25 119.28 M 232.01 127.14 C 228.38 124.86 225.39 121.62 222.92 118.96" fill="none" stroke="#1ba1e2" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 118.96 118.49 M 118.81 121.52 C 152.21 118.26 187.91 120.35 220.01 120.69 M 119.92 120.3 C 158.98 118.62 200.11 118.82 220.18 119.86 M 221 120 C 227.57 121.37 228.15 124.68 231.77 127.54 M 222.69 118.13 C 225.27 119.96 229.1 121.39 230.23 129.63 M 228.27 128.39 C 231.65 141.63 230.99 155.62 230.46 169.05 M 230.96 129.3 C 230.27 139.99 229.45 151.01 229.79 171.47 M 230 171 C 230.56 177.99 225.39 181.91 221.28 180.94 M 229.61 172.74 C 228.31 177.16 228.07 178.51 220.82 181.93 M 219.44 180.16 C 190.53 179.69 159.96 178.93 118.8 180.01 M 220.31 180.7 C 196.35 179.31 172.37 178.41 118.94 180.32 M 119 180 C 113.17 181.3 111.42 178.06 108.54 169.57 M 117.71 179.24 C 111.04 178.18 108.3 174.86 108.06 171.5 M 108.63 171.75 C 108.89 160.18 110.99 149.46 109.84 127.99 M 110.71 170.18 C 109.42 157.29 109.91 141.75 110.1 128.33 M 110 129 C 111.35 124.14 112.65 119.46 118.95 120.74 M 111.92 129.48 C 111.96 122.56 111.18 119.12 120.2 120.17" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="460" y="130" width="40" height="20" fill="#0050ef" stroke="#001dbc" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 140px; margin-left: 461px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #ffffff; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Text
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="480" y="144" fill="#ffffff" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Text
+                </text>
+            </switch>
+        </g>
+        <rect x="240" y="270" width="40" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 280px; margin-left: 241px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+                                Text
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="260" y="284" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Text
+                </text>
+            </switch>
+        </g>
+        <path d="M 360 250 L 410.51 233.16 Q 420 230 428.94 234.47 L 454.3 247.15" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 459 249.5 L 451.17 249.5 L 454.3 247.15 L 454.3 243.24 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 233px; margin-left: 412px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; background-color: #ffffff; white-space: nowrap; ">
+                                Label
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="412" y="237" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Label
+                </text>
+            </switch>
+        </g>
+        <path d="M 360 250 L 453.63 250" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 458.88 250 L 451.88 253.5 L 453.63 250 L 451.88 246.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 251px; margin-left: 411px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; background-color: #ffffff; white-space: nowrap; ">
+                                Label
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="411" y="254" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Label
+                </text>
+            </switch>
+        </g>
+        <path d="M 360 250 L 453.63 250" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 458.88 250 L 451.88 253.5 L 453.63 250 L 451.88 246.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 251px; margin-left: 411px;">
+                        <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+                            <div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; background-color: #ffffff; white-space: nowrap; ">
+                                Label
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="411" y="254" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle">
+                    Label
+                </text>
+            </switch>
+        </g>
+        <path d="M 190 380 L 253.63 380" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 258.88 380 L 251.88 383.5 L 253.63 380 L 251.88 376.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Viewer does not support full SVG 1.1
+            </text>
+        </a>
+    </switch>
+</svg>
+
+    <figcaption>
+        <em>Fragebaum</em>
     </figcaption>
 </figure>
 <p>Aufgrund der Antworten des Fragebaums können Zustände errechnet werden. Die Diagramme zur Errechnungen sind wie folgt:</p>
@@ -801,6 +1061,7 @@ graph LR;
 </figure></p>
 <p>Im Anschluss müssen die Werte eingetragen werden.</p>
 <h5 id="konditionen-swerte-einfügen-copy--paste">Konditionen/-swerte einfügen (Copy &amp; Paste)</h5>
+<p>TODO: Konditionswerte pflegen</p>
 <h4 id="datenmodell">Datenmodell</h4>
 <figure>
     <div class="mermaid">
@@ -1278,7 +1539,7 @@ erDiagram
     
         <div class="copyright">
             
-            <span>&copy; 2021, A. Schollwöck
+            <span>&copy; 2022, A. Schollwöck
             </span>
         </div>
     </div>

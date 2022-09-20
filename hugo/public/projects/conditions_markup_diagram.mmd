@@ -1,0 +1,13 @@
+%%{init: {'theme':'neutral', "sequence": { "height": 40, "actorMargin": 80, "mirrorActors": false, "bottomMarginAdj": 1 }}}%%
+graph LR;
+    Auf[Aufschlag];
+        Auf-->AufZ[Zentral];
+            AufZ-->AufZK[Kunde];
+                AufZK-->ZRM0;
+            AufZ-->AufZI[Intern];
+                AufZI-->ZRM1;
+        Auf-->AufL[Lokal];
+            AufL-->AufLK[Kunde];
+                AufLK-->YRM0;
+            AufL-->AufLI[Intern];
+                AufLI-->YRM1;

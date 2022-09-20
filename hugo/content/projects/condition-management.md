@@ -59,13 +59,13 @@ Als Definition für eine Kondition wird die Beschreibung von SAP verwendet. Eine
 
 Eine Kalkulation ist eine Art Rechenvorschrift, welche Arten von Werten verwendet werden und wie diese miteinander verrechnet werden sollen. In eine Angebotskalkulation gibt es bspw. die Arten
 - Preis
-- Abschlag / Rabatt / Mark down
+- Abschlag / Rabatt / Discount
 - Aufschlag / Mark up.
 
-Pro Art wird eine Konditions**art** definiert und für jede Art werden Bedingungen für Konditionen definiert. Pro Konditionsart und Kombination aus Bedingungen kann es genau 0 oder 1 Ergebnis geben.
+Pro Art wird eine Konditions**art** definiert und für jede Art werden Bedingungen für Konditionen definiert.
 
 Eine Kondition besitzt die Eigenschaften:
-{{< figure title="Kondition-Modell" >}}
+{{<figure title="Datenmodell: Kondition">}}
 | Merkmal | Beschreibung | Beispiel |
 | --------- | ------------- | ----- |
 | Nummer | Eindeutiges Kennzeichen | 10384872, ... |
@@ -75,10 +75,13 @@ Eine Kondition besitzt die Eigenschaften:
 | Berechnungsregel | Gibt an wie der Wert verrechnet werden muss |  |
 | Ausschschluss | Ein Zusatzkennzeichen |  |
 | Verkaufsaktion | Gibt an ob Kondition verknüpft ist |  |
-{{< / figure >}}
+{{</figure >}}
+
+### Bedingungen
+Es wurde bereits von Bedingungen gesprochen welche immer an eine Kondition geknüpft sind und angibt, wann diese verwendet werden darf / kann / soll. Der Aufbau einer Bedingung besteht aus einem festen Anteil, welcher bei jeder Bedingung gleich ist und einen dynamischen Anteil. Dieser dynamische Anteil kann mit unterschiedlichsten Feldern angereicht werden, welche Teil einer Bedingung sein sollen.
 
 Das Modell für eine Bedingung pro Kondition:
-{{< figure title="Konditionsbedingung-Modell" >}}
+{{<figure title="Datenmodell: Bedingung">}}
 | Merkmal | Beschreibung | Beispiel |
 | --------- | ------------- | ----- |
 | KondNummer | Eindeutiger Verweis auf Kondition | 10384872, ... |
@@ -88,19 +91,71 @@ Das Modell für eine Bedingung pro Kondition:
 | Gültig von | Ab wann die Kondition gültig ist | 01.01.2020 |
 | Gültig bis | Bis wann die Kondition gültig ist | 31.12.2020  |
 | Gelöscht | Das Löschkennzeichen | "", X |
-{{< / figure >}}
+{{</figure>}}
 
-Da es pro Konditionsart unterschiedliche Bedingungen geben kann muss diesen eine Gewichtung verliehen werden. Ansonsten könnte nicht unterschieden werden, wenn für eine Anzahl an Parametern mehrere Bedingungen erfüllt werden würde, welche Kondition verwendet werden soll. Deshalb wird den Bedingungen eine Zugriffsreihenfolge verliehen, d.h. welche Bedingungen vor anderen geprüft werden sollen.
+Wichtig ist die Eindeutigkeit der Konditionen. Um diese zu gewährleistungen müssen folgende Grundvoraussetzugnen beachtet werden:
+-   pro Konditionsart und Kombination aus Bedingungen kann es genau 0 oder 1 Ergebnis geben.
+-   Eine Kondition mit den selben Bedingungen kann nur 1-mal vorhanden sein  
+    Ist der dynamische Anteil identisch können diese bspw. durch Änderung des Gültigkeitsdatums gepflegt werden.
+
+In folgendem Beispiel wird verdeutlicht, wie unterschiedliche Listenpreise für ein Material gepflegt werden können mit Hilfe des Gültigkeitszeitraumes:
+
+{{<figure title="Pflege Konditionssätze Beispiel">}}
+| Kondart | Bedingung #1 | Bedingung #2 | Wert | Von | Bis |
+| --------- | ------------- | ----- | ----- | ----- | ----- |
+| PR00 | Matnr = 12AB3 | Kdgrp = A3 | 950€ | 2020-01-01 | 2021-12-31 |
+| PR00 | Matnr = 12AB3 |  | 1250€ | **2020-07-01** | **2021-06-30** |
+| PR00 | Matnr = 12AB3 |  | 1000€ | **2019-07-01** | **2020-06-30** |
+{{</figure>}}
+
+### Zugriffsfolge
+Da es pro Konditionsart unterschiedliche Bedingungen geben kann muss diesen eine Gewichtung verliehen werden. Ansonsten könnte nicht unterschieden werden, wenn für eine Anzahl an Parametern mehrere Bedingungen erfüllt werden würde, welche Kondition verwendet werden soll. Deshalb wird den Bedingungen eine Zugriffs(reihen)folge verliehen, d.h. welche Bedingungen vor anderen geprüft werden sollen.
 
 Ein Beispiel von Zugriffsfolgen für eine Konditionsart "PR00 - Listenpreis" könnte sein:
-{{< figure title="Zugriffsfolgen-Beispiel" >}}
+{{<figure title="Zugriffsfolgen-Beispiel">}}
 | Feld #1 | Feld #2 | Feld(n) |
 | --------- | ------------- | ----- |
 | Matnr | Kdnr |  |
 | Matnr |  |  |
-{{< / figure >}}
+{{</figure>}}
+
+Die Zugriffsfolgen werden von "oben nach unten" geprüft und dementsprechend muss auch die Reihenfolge festgelegt werden. Die Reihenfolge richtet sich von "spezifisch zu generell". D.h. Bedingungen welche spezifischer sind müssen vor generelleren Bedingungen geprüft werden, da ansonsten evtl. eine spezifische Bedingung nicht mehr erreicht werden kann.
+
+In oben dargestellten Beispiel macht es keinen Sinn erst die Bedingung "Matnr" vor "Matnr + Kdnr" zu prüfen, da immer ein Preis vorhanden sein soll und bei bestimmten Situationen etwas spezifischeres gepflegt sein kann.
 
 [Konditionen und Preisfindung](https://help.sap.com/viewer/14ad85ff93b342afb770eb468a9fd898/6.00.31/de-DE/5e49b753128eb44ce10000000a174cb4.html)
+
+### Kalkulationsschema / Rechenschema
+Die in den vorherigen Abschnitten definierten Modelle (Kondition, Bedingung und Zugriffsfolge) beinhalten erstmal nur Daten. Damit diesen Daten auch Sinnhaftigkeit verliehen wird muss ein Zusammenhang hergestellt werden. Dieser Zusammenhang wird mit Hilfe eines Schemas hergestellt. In einem Schema wird zuerst definiert welche Kondition(sarten) und damit deren Bedingungen und Zugriffsfolgen verwendet werden.
+
+Ein wichtiger Fokus liegt hierbei auf den Bedingungen. Da eine Bedingung einen dynamischen Anteil besitzt muss dieser dynamische Anteil auch verwendet werden können. D.h. die Felder der Bedingungen müssen auch dem Schema bekannt sein, ansonsten können diese nicht als Parameter für eine Konditionsfindung verwendet werden.
+Dies kann auch eine bewusste Entscheidung sein um etwas bestimmte Bedingungen in bestimmten Schemata nicht zu verwenden, was allerdings vorher genau festgelegt werden sollte um Verwirrung zu vermeiden.
+
+Nur Bedingungen prüfen und Konditionen auslesen reicht allerdings nicht. Es muss auch festgelegt werden, wie diese ermittelten Werte angewendet werden sollen. Betrachten wir ein Angebot, dann wird in diesem bspw. die Preisermittlung über ein solches Schema gesteuert. Nachdem Preis, Aufschläge, Abschläge, etc. ermittelt wurden muss auch definiert werden wie diese Werte miteinander verrechnet werden sollen.
+
+Das bedeutet, dass das Schema die eigentliche Intelligenz und Logik besitzt. Die Schemen sollten auch einigermaßen stabil sein und die grundsätzliche Logik nicht zu sehr geändert werden, da die Konditionen und die Schemata in Verbindung gebracht werden. Änderungen in den Modellen haben dadurch direkten Einfluss aufeinander.
+
+Je nach Einsatzgebiet der Schemata verfügen diese über bestimmte Operationen. Häufig wird hier von Rechenoperationen gesprochen, aber auch Zwischenergebnisse oder Operationen unabhängig von Berechnungen können und müssen möglich sein.
+
+Ein einfaches Beispiel einer Angebotsrechnung mittels eines definierten "Kalkulationsschemas":
+{{<figure title="Kalkulationsschema Beispiel">}}
+| Parameter | Wert |
+| --------- | ----- |
+| Matnr | 12AB3 |
+| Kdnr | 1234 |
+| VKORG | 1000 |
+| VTWEG | 10 |
+| Werk | 1000 |
+
+<p></p>
+
+| Funktion | Konditionsart | Wert | Kommentar |
+| --------- | ------------- | ----- | ------------- |
+| Ermittlung | PR00 | 1000€ | Listenpreisermittlung |
+| Ergebnis | PB00 | 1000€ | Übernahme als Bruttopreis |
+| Ermittlung | ZR00 | 10% | Rabattermittlung |
+| Ergebnis | PN00 | 900€ | Errechnung Nettopreis |
+{{</figure>}}
 
 
 ## Fachliche Anforderungen
@@ -113,18 +168,18 @@ Wie eingangs angesprochen wird eine formale Definition von Konditionen bzw. den 
 Klassische Fälle von formalen Beschreibungen sind bspw. Auf- und Abschläge, welche den gleichen Wert für mehrere Bedingungen definieren. Als Beispiel dient ein Rabatt, welcher allen Landesgesellschaften in gleicher Höher für eine bestimmte Produktgruppe gewährt werden soll. Dafür werden alle Gesellschaften ausgewählt, die Produktgruppenmerkmale und einmalig der Wert festgelegt.
 Durch die Definition "Alle Gesellschaften" und "einem Wert" können die Rabattsätze automatisch ermittelt werden. Durch die automatische Ermittlung lässt sich auch bei Ergänzung einer neuen Gesellschaft einfach der Rabatt erweitern.
 
-{{< figure title="Formale Definition Beispiel" >}}
+{{<figure title="Formale Definition Beispiel">}}
 | Parameter | Wert | Beschreibung |
 | --------- | ------------- | ----- |
 | Konditionsart | Interner Rabatt (ZR01) |  |
 | Bedingung #1 | Landesgesellschaft = Europa |  |
 | Bedingung #2 | Produktgruppe = ABC |  |
 | Wert | 15% |  |
-{{< / figure >}}
+{{</figure>}}
 
 Das Ergebnis sind die einzelnen berechneten Konditionssätze, welche in diesem Fall das Kreuzprodukt der Bedingungen ist:
 
-{{< figure title="Ermittelte Konditionssätze (Formale Definition) Beispiel" >}}
+{{<figure title="Ermittelte Konditionssätze (Formale Definition) Beispiel">}}
 | Kondart | Bedingung #1 | Bedingung #2 | Wert |
 | --------- | ------------- | ----- | ----- |
 | ZR01 | VKB = 100 | Prd.grp. = ABC | 15% |
@@ -132,7 +187,7 @@ Das Ergebnis sind die einzelnen berechneten Konditionssätze, welche in diesem F
 | ZR01 | VKB = 300 | Prd.grp. = ABC | 15% |
 | ZR01 | VKB = 400 | Prd.grp. = ABC | 15% |
 | ... | ... | ... | ... |
-{{< / figure >}}
+{{</figure>}}
 
 In vielen Fällen ist eine formale Definition wie eine einzelne Definition, da die formale Definition so spezifisch ist, dass im Prinzip einzelne Konditionssätze definiert werden. In diesen Fällen ist es nicht sinnvoll eine formale Definition zu erstellen, sondern den Nutzer so zu unterstützen, dass die Konditionen mit einfachen Mitteln und so viel Unterstützung wie möglich erstellt werden können.
 
@@ -154,6 +209,10 @@ stateDiagram-v2
     
 {{</mermaid>}}
 
+{{<figure title="Definition: Zustandsdiagramm">}}
+{{<inlinesvg path="/content/projects/conditions_state_diagram.svg">}}
+{{</figure>}}
+
 In jedem Zustand sind Aktionen des Nutzers oder Systems notwendig:
 - New:
 Fragebaum wird befüllt.
@@ -173,7 +232,7 @@ Einzelne Konditionssätze sollen nicht manuell gepflegt werden.
 #### Fragebaum
 Die erste Unterstützung für die Nutzer ist ein Fragebaum, der sie zum einen in die richtige Richtung der Konditionsarten schickt und zum anderen die Bedingungen abfrägt.
 
-{{< figure title="Felder für Fragebaum" >}}
+{{<figure title="Felder für Fragebaum">}}
 | Kategorie | Feld | Frage | Werte |
 | ---- | ---- | --------- | ------------- |
 | Art | Art | Art der Kondition(en)? | Preis, Aufschlag, Abschlag, Provision |
@@ -183,7 +242,11 @@ Die erste Unterstützung für die Nutzer ist ein Fragebaum, der sie zum einen in
 | Bed. | VKORG | Geber | Alle, 1000, 5000, ... |
 | Bed. | VKB | Empfänger | Alle, 600, 701, ... |
 | Bed. | Positionsfelder | Positionsdaten | MG, Familie, Material, ... |
-{{< / figure >}}
+{{</figure>}}
+
+{{<figure title="Fragebaum">}}
+{{<inlinesvg path="/content/projects/questiontree.drawio.svg">}}
+{{</figure>}}
 
 Aufgrund der Antworten des Fragebaums können Zustände errechnet werden. Die Diagramme zur Errechnungen sind wie folgt:
 
@@ -302,6 +365,8 @@ Aufgrund der Informationen können nun die notwendigen Konditionen mit Bedingung
 Im Anschluss müssen die Werte eingetragen werden.
 
 ##### Konditionen/-swerte einfügen (Copy & Paste)
+TODO: Konditionswerte pflegen 
+
 
 #### Datenmodell
 

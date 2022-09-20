@@ -1,0 +1,10 @@
+stateDiagram-v2
+
+    [*] --> Definition
+
+    state Definition {
+        [*] --> New
+        New --> Editing : edit
+        Editing --> Released : release
+        Released --> [*]
+    }
