@@ -17,8 +17,8 @@ They make you question your life. I don't mean in a negative way but instead mor
 - What do you want to achieve in the future?
 - What is really important to you?
 
-The really good thing about Jordan is, that he not only tells you in a very direct way (I like it, I'm german ;)) to reflect on yourself but he also tells you on how to do it and suggests practical ways on how to approach it. You can check all his lectures on YouTube (for free!) but... well... it will take time to consume some > 400 hours of lectures ;)
-There are also some videos on the internet which summarize it for you ;)
+The really good thing about Jordan is, that he not only tells you in a very direct way (I like it, I'm german 😉) to reflect on yourself but he also tells you on how to do it and suggests practical ways on how to approach it. You can check all his lectures on YouTube (for free!) but... well... it will take time to consume some > 400 hours of lectures 😉
+There are also some videos on the internet which summarize it for you 😉
 
 So, here I am - reflecting on my life.
 - I can't wish for a better family
@@ -29,7 +29,7 @@ But I know something is missing.
 - Basically always working from Monday - Friday
 - Free time is mostly wasted on YouTube (even so I watch documentaries - haha - and always trying to learn something new)
 
-There are also ideas in my head on new projects, some one-man shows as well as projects with a friend (hi Tobi ;)).
+There are also ideas in my head on new projects, some one-man shows as well as projects with a friend (hi Tobi 😉).
 Usually there is enough motivation to start them and usually I get them to production. But then it's over and out - even so I would like to add more features, maintain them a bit and so on.
 I will blog about those here as well in the future.
 
@@ -46,7 +46,7 @@ It respects my hours I put into my day job and also considers differnt topics wh
 - Daily life (groceries)
 - Family
 
-I hope this helps to keep a bit of disciplin up. Looking at a plan does always feel different than having it only in your head and telling yourself (Jordan actually talked about this as well but I knew before, too :)).
+I hope this helps to keep a bit of disciplin up. Looking at a plan does always feel different than having it only in your head and telling yourself (Jordan actually talked about this as well but I knew before, too 😊).
 
 If I don't stick 100% to the plan - it's fine.
 Sometimes I'm not up to it, maybe because my day job was really stressful that day and I can't think anymore and feel really tired or ... life happens, e.g. friends come over or short term plans to meet with friends or family somewhere.
