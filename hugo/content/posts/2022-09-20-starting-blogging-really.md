@@ -17,8 +17,11 @@ They make you question your life. I don't mean in a negative way but instead mor
 - What do you want to achieve in the future?
 - What is really important to you?
 
-The really good thing about Jordan is, that he not only tells you in a very direct way (I like it, I'm german 😉) to reflect on yourself but he also tells you on how to do it and suggests practical ways on how to approach it. You can check all his lectures on YouTube (for free!) but... well... it will take time to consume some > 400 hours of lectures 😉
-There are also some videos on the internet which summarize it for you 😉
+And of course the question of all questions:
+- What is the meaning of life? (Spoiler: Responsibility. And what my mother printed on a flag for our local club: Having a goal in mind gives meaning to life)
+
+The really good thing about Jordan is, that he not only tells you in a very direct way (I like it, I'm german 😉) to reflect on yourself but he also tells you on how to do it and suggests practical ways on how to approach it. You can check all his lectures on YouTube (for free!) but... well... it will take time to consume some > 400 hours of lectures 😉.
+There are also some videos on the internet which summarize it for you 😉.
 
 So, here I am - reflecting on my life.
 - I can't wish for a better family
