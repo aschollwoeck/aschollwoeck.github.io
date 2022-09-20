@@ -58,3 +58,8 @@ I really have to say: Keep it simple and it will fill you with joy when you come
 
 This is it for today, I could write some more but it is a good start and I can continue in about 2 days, when the next "writing" pops up in my plan.
 Let's see if I can keep it up... we will see - wish me luck...
+
+
+PS: I've  updated this blog a bit to always show a footer - seems like I missed it during the setup 2 years ago.
+This was then my 30 minutes of "programming" for today... fiddling a bit with css.
+But I liked it - I felt productive today !
