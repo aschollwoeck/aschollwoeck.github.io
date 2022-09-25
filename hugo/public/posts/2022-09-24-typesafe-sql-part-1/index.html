@@ -106,7 +106,7 @@ There are plenty of libraries and frameworks out there to integrate it in your f
 </span>
 
     <span>
-        <i class="fas fa-inbox"></i>&nbsp;2952 words
+        <i class="fas fa-inbox"></i>&nbsp;2923 words
     </span>
 
 
@@ -147,8 +147,7 @@ Also they follow usually one of two styles:</p>
 <p>Each has their individual pros and cons in one form or another.</p>
 <p>Full ORMs come with an optionated approach you have to follow and are limited to but usually are enough for most of the CRUD apps out there.
 But they can not provide the same functionality as raw SQL. In case you need more complex queries you usally resort to hand written SQL.
-In .NET world the most common full ORM is Entity Framework.</p>
-<p>They include</p>
+In .NET world the most common full ORM is Entity Framework. It includes</p>
 <ul>
 <li>Connection handling &amp; database driver</li>
 <li>Object mapping</li>
@@ -172,8 +171,8 @@ In .NET world the most common full ORM is Entity Framework.</p>
 </ul>
 <p>Personnally I like full ORMs when looking at for example Django. It&rsquo;s very powerful and usually easy to set up and works out of the box. Nonetheless I had issues with the setup of Entity Framework when there is already a database existing and integrating it to a existing project. Many hours spent to check for error messages which should not have appeared&hellip; I guess partly my fault for doing something wrong. But that is exactly the point - when I had used a micro ORM or hand written SQL I would have been definitly more productive because of my previous experiences.</p>
 <p>Hand written SQL without sanity is dangerous. Sometimes I like dangerous but not in this context. Mitigating those dangers is definitly possible but I don&rsquo;t trust doing that myself. There are too much hurdles and corner cases I might miss. Usually there are helpers available in the form of &ldquo;Prepared statements&rdquo; for example. But using them requires definitly more lines of codes and are then again more abstract not standard SQL.</p>
-<p>As you might have guessed I prefer micro ORMs. They provide me with sanity, are usually quick to setup and don&rsquo;t get in my way when I want to things my way because I feel thats in a given context the best solution. Also they only add very little overhead to each statement I throw at a database.
-When talking about C# I prefer Dapper - it&rsquo;s perfect in doing what it does. It also has it&rsquo;s little quirks (e.g. query results of a couple of differenct classes/objects) but it&rsquo;s manageable and from a cost-benefit relation a good compromise.</p>
+<p>As you might have guessed I prefer micro ORMs. They provide me with sanity, are usually quick to setup and don&rsquo;t get in my way when I want to do things my way because I feel thats the best solution in a given context. Also they only add very little overhead to each statement I throw at a database.
+When talking about C# I prefer Dapper - it&rsquo;s perfect in doing what it does. It does have it&rsquo;s little quirks (e.g. query results of a couple of differenct classes/objects) but it&rsquo;s manageable and from a cost-benefit relation a good compromise.</p>
 <p>Nonetheless I miss specifically one feature I want and like in compiled, typed languages: type checking.</p>
 <p>That&rsquo;s why I will try to add this in an extra library which can be used. It&rsquo;s goals are:</p>
 <ul>
@@ -194,16 +193,15 @@ Whatever libraries or frameworks you use - meaning you could even use it in full
 <li>Database scheme migrations
 We only care about SQL. There are enough and very good libraries out there - mostly from official sources. We don&rsquo;t want to touch that.</li>
 </ul>
-<p>As you can imagin I was looking for something like this already on &ldquo;the market&rdquo;. But to be honest I couldn&rsquo;t find anyting like it in .NET world, neither on Nuget nor on Github (totally possible I missed something).
-But&hellip; I found something in Java world: <a href="https://www.jooq.org" target="_blank">jOOQ</a>.</p>
+<p>I found something in Java world: <a href="https://www.jooq.org" target="_blank">jOOQ</a>.</p>
 <p>This seemed exactly what I was looking for. You are able to write abstracted SQL with type safety and it&rsquo;s really easy to use. You need to take care of some stuff like Code Generation to make type checking possible but hey&hellip; somewhere the information for our compilers need to come from and it seems a reasonable approach.
 What I did (and do) not like is the added performance overhead but jooq does querying and executing all by itself so there might not be too much overhead involved. To be honest I did not thoroughly check it as I am more of a .NET kid.</p>
 <p>So the journey began to look for something similar in .NET. I found <a href="https://sourceforge.net/projects/cooq/" target="_blank">cooq</a> but it seems abandoned and also not 100% what I&rsquo;m looking for even so it was like 90% there.
-Then there is also a reference to <a href="https://github.com/EndsOfTheEarth/Typed-Query" target="_blank">Typed Query</a> - this is incredible! Exactly what I was looking for !
-I thought&hellip; and realised it still does not fulfill my desire for full type checked SQL.
-Let&rsquo;s not sound too pesimstic - I got to now lots of important and very good information. I can learn a lot and use it wisely.</p>
+Then there is also a reference to <a href="https://github.com/EndsOfTheEarth/Typed-Query" target="_blank">Typed Query</a> - this is incredible! Exactly what I was looking for !</p>
+<p>I thought&hellip; and realised it still does not fulfill my desire for full type checked SQL.
+Let&rsquo;s not sound too pesimstic - I got to know lots of important and very good information. I learned a lot and can use that now wisely.</p>
 <p>In the end I decided to create such a library myself with the knowledge I got from jOOQ and Typed Query.
-Use principles from Typed Query and jOOQ, meaning:
+Using principles from Typed Query and jOOQ, meaning:
 We need some kind of code generation and method chaining as we know it from functional programming and thus Linq.</p>
 <p>I&rsquo;m trying to make it work like this:</p>
 <pre><code class="language-C#">Select(Tbl_Cards.Id(), Tbl_Cards.Name(), Tbl_Cards.Form().As(&quot;colA&quot;))
@@ -220,8 +218,8 @@ ORDER BY id
 LIMIT @1
 </code></pre>
 <p>I still want to use Dapper as it does a fantastic job. We only need to provide input for Dapper or provide an additional abstraction layer.</p>
-<p>One of our goals is also &ldquo;zero-cost abstractions&rdquo;&hellip; let&rsquo;s see if we can do this somehow with new source generation of .NET 5.
-We might can get rid of method chaining and thus additional overhead by replacing the method chaining during compile time with a static string.
+<p>One of our goals is also &ldquo;zero-cost abstractions&rdquo;&hellip; let&rsquo;s see if we can do this somehow with new source generation of .NET 5 and exciting new features in .NET 6.
+We might can get rid of method calls during runtime and thus additional overhead by replacing the method chaining during compile time with a static string.
 Then we would have the same behaviour as we would use Dapper only.</p>
 <p>This might look then like this:</p>
 <figure>
@@ -260,21 +258,21 @@ graph LR;
 <p>But let&rsquo;s not get ahead of ourselves, one step at a time - first start with our foundation, meaning: SQL and parameters.</p>
 <h2 id="sql-dialects">SQL dialects</h2>
 <p>To make things more compliacted: there are multiple SQL dialects out there - perfect.
-Ideally we want to support the most common SQL dialects out there and if there is a new one it should be easy to integrate it as well.
-Isn&rsquo;t there a &ldquo;standard&rdquo; for it&hellip; ? Ah, yeah, right there is one.</p>
-<p>Don&rsquo;t get me started on those standards.</p>
+Ideally we want to support the most common SQL dialects out there and if there is a new one it should be easy to integrate it as well.</p>
+<p>Isn&rsquo;t there a &ldquo;standard&rdquo; for it&hellip; ? Ah, yeah, right there is one.
+Don&rsquo;t get me started on those standards.</p>
 <p>So we will pick a database which we use to start of which also has a good documentation on it&rsquo;s syntax.
-You might have guessed it: Either PostgreSQL or SQLite.
-Not bad, we choose SQLite.</p>
+You might have guessed it: Either PostgreSQL or SQLite.</p>
+<p>I&rsquo;m choosing SQLite.</p>
 <p>Why? Because it&rsquo;s easy to setup and I like it - most applications/websites do not need more than SQLite.
-It also has great documentation and we do even get some nice flow diagrams of SQL with abstractions and hints for code reusage !
+It also has great documentation and we do even get some nice flow charts of SQL with abstractions and hints for code reusage !
 I&rsquo;m still amazed what is possible with a file system and some well written code - unbelivable, really, I mean it.</p>
 <ul>
 <li><strong>(Requirement)</strong> Support as a first step SQLite</li>
 </ul>
 <p>Next issue is data types&hellip; oh man. This is something I don&rsquo;t like about SQLite. Why not do it like others&hellip; even if you don&rsquo;t want to but please&hellip; at least Date and Time data types 👀🤔. Date and Time is hard to get right&hellip; so I would have really preferred defaults.
 Well not something we can change now, let&rsquo;s make the best out of it and do it like other providers&hellip; with a bit of configurable magic.</p>
-<p>In the end we need to map types to what we have available in C#. Because we have less data types available in C# we need to do a 1:n mapping. In case of SQLite this should be fine but in for other SQL dialects such as PostgreSQL we might need to think about how to type check also for example floating points.</p>
+<p>In the end we need to map types to what we have available in C#. Because we have less data types available in C# we need to do a 1:n mapping. In case of SQLite this should be fine but in other SQL dialects such as PostgreSQL we might need to think about how to type check also for specific numeric and floating point types.</p>
 <ul>
 <li><strong>(Requirement)</strong> Create mapping from database data types to common C# data types</li>
 </ul>

@@ -21,9 +21,7 @@ Each has their individual pros and cons in one form or another.
 
 Full ORMs come with an optionated approach you have to follow and are limited to but usually are enough for most of the CRUD apps out there.
 But they can not provide the same functionality as raw SQL. In case you need more complex queries you usally resort to hand written SQL.
-In .NET world the most common full ORM is Entity Framework. 
-
-They include
+In .NET world the most common full ORM is Entity Framework. It includes
  - Connection handling & database driver
  - Object mapping
  - Types safe querying and executions
@@ -46,8 +44,8 @@ Personnally I like full ORMs when looking at for example Django. It's very power
 
 Hand written SQL without sanity is dangerous. Sometimes I like dangerous but not in this context. Mitigating those dangers is definitly possible but I don't trust doing that myself. There are too much hurdles and corner cases I might miss. Usually there are helpers available in the form of "Prepared statements" for example. But using them requires definitly more lines of codes and are then again more abstract not standard SQL.
 
-As you might have guessed I prefer micro ORMs. They provide me with sanity, are usually quick to setup and don't get in my way when I want to things my way because I feel thats in a given context the best solution. Also they only add very little overhead to each statement I throw at a database.
-When talking about C# I prefer Dapper - it's perfect in doing what it does. It also has it's little quirks (e.g. query results of a couple of differenct classes/objects) but it's manageable and from a cost-benefit relation a good compromise.
+As you might have guessed I prefer micro ORMs. They provide me with sanity, are usually quick to setup and don't get in my way when I want to do things my way because I feel thats the best solution in a given context. Also they only add very little overhead to each statement I throw at a database.
+When talking about C# I prefer Dapper - it's perfect in doing what it does. It does have it's little quirks (e.g. query results of a couple of differenct classes/objects) but it's manageable and from a cost-benefit relation a good compromise.
 
 Nonetheless I miss specifically one feature I want and like in compiled, typed languages: type checking.
 
@@ -70,19 +68,19 @@ Out of scope is definetly:
  - Database scheme migrations
 We only care about SQL. There are enough and very good libraries out there - mostly from official sources. We don't want to touch that.
 
-As you can imagin I was looking for something like this already on "the market". But to be honest I couldn't find anyting like it in .NET world, neither on Nuget nor on Github (totally possible I missed something).
-But... I found something in Java world: [jOOQ](https://www.jooq.org).
+I found something in Java world: [jOOQ](https://www.jooq.org).
 
 This seemed exactly what I was looking for. You are able to write abstracted SQL with type safety and it's really easy to use. You need to take care of some stuff like Code Generation to make type checking possible but hey... somewhere the information for our compilers need to come from and it seems a reasonable approach.
 What I did (and do) not like is the added performance overhead but jooq does querying and executing all by itself so there might not be too much overhead involved. To be honest I did not thoroughly check it as I am more of a .NET kid.
 
 So the journey began to look for something similar in .NET. I found [cooq](https://sourceforge.net/projects/cooq/) but it seems abandoned and also not 100% what I'm looking for even so it was like 90% there.
 Then there is also a reference to [Typed Query](https://github.com/EndsOfTheEarth/Typed-Query) - this is incredible! Exactly what I was looking for !
+
 I thought... and realised it still does not fulfill my desire for full type checked SQL.
-Let's not sound too pesimstic - I got to now lots of important and very good information. I can learn a lot and use it wisely.
+Let's not sound too pesimstic - I got to know lots of important and very good information. I learned a lot and can use that now wisely.
 
 In the end I decided to create such a library myself with the knowledge I got from jOOQ and Typed Query.
-Use principles from Typed Query and jOOQ, meaning:
+Using principles from Typed Query and jOOQ, meaning:
 We need some kind of code generation and method chaining as we know it from functional programming and thus Linq.
 
 I'm trying to make it work like this:
@@ -104,13 +102,11 @@ LIMIT @1
 
 I still want to use Dapper as it does a fantastic job. We only need to provide input for Dapper or provide an additional abstraction layer.
 
-One of our goals is also "zero-cost abstractions"... let's see if we can do this somehow with new source generation of .NET 5.
-We might can get rid of method chaining and thus additional overhead by replacing the method chaining during compile time with a static string.
+One of our goals is also "zero-cost abstractions"... let's see if we can do this somehow with new source generation of .NET 5 and exciting new features in .NET 6.
+We might can get rid of method calls during runtime and thus additional overhead by replacing the method chaining during compile time with a static string.
 Then we would have the same behaviour as we would use Dapper only.
 
 This might look then like this:
-
-
 
 {{<mermaid title="Type safe SQL flow">}}
 graph TD;
@@ -140,23 +136,24 @@ But let's not get ahead of ourselves, one step at a time - first start with our 
 ## SQL dialects
 To make things more compliacted: there are multiple SQL dialects out there - perfect.
 Ideally we want to support the most common SQL dialects out there and if there is a new one it should be easy to integrate it as well.
-Isn't there a "standard" for it... ? Ah, yeah, right there is one.
 
+Isn't there a "standard" for it... ? Ah, yeah, right there is one.
 Don't get me started on those standards.
 
 So we will pick a database which we use to start of which also has a good documentation on it's syntax.
 You might have guessed it: Either PostgreSQL or SQLite.
-Not bad, we choose SQLite.
+
+I'm choosing SQLite.
 
 Why? Because it's easy to setup and I like it - most applications/websites do not need more than SQLite.
-It also has great documentation and we do even get some nice flow diagrams of SQL with abstractions and hints for code reusage !
+It also has great documentation and we do even get some nice flow charts of SQL with abstractions and hints for code reusage !
 I'm still amazed what is possible with a file system and some well written code - unbelivable, really, I mean it.
  - **(Requirement)** Support as a first step SQLite
 
 Next issue is data types... oh man. This is something I don't like about SQLite. Why not do it like others... even if you don't want to but please... at least Date and Time data types 👀🤔. Date and Time is hard to get right... so I would have really preferred defaults.
 Well not something we can change now, let's make the best out of it and do it like other providers... with a bit of configurable magic. 
 
-In the end we need to map types to what we have available in C#. Because we have less data types available in C# we need to do a 1:n mapping. In case of SQLite this should be fine but in for other SQL dialects such as PostgreSQL we might need to think about how to type check also for example floating points.
+In the end we need to map types to what we have available in C#. Because we have less data types available in C# we need to do a 1:n mapping. In case of SQLite this should be fine but in other SQL dialects such as PostgreSQL we might need to think about how to type check also for specific numeric and floating point types.
  - **(Requirement)** Create mapping from database data types to common C# data types
 
 
