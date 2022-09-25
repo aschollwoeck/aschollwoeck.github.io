@@ -6,6 +6,8 @@ tags: ["blog"]
 showToc: false
 ---
 
+
+
 Latley I have been listening a lot to Jordan Peterson. No, not because of his viral videos arguing for/against feminism and other such topics I don't even want to get into. They are political and I don't want to discuss those topics here.
 Instead I started hearing him on those... "Motivational" videos in which you can really get stuck, feel hyped and waste a ton of your time.
 I guess I started reading comments about Jordan in those videos and started to activley look him up. Of course the videos I mentioned earlier popped up as well but I specifcally looked at his videos talking about productivity and his speaches about life in generally - specifically about men.
