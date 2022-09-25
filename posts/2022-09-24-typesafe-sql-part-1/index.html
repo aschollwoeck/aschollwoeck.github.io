@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.79.0" />
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+<title>Typesafe SQL - Part 1 - A. Schollwöck&#39;s Blog</title>
+
+
+<meta name="author" content="A. Schollwöck" />
+
+
+<meta name="description" content="Blog of work and hobby related topics and projects" />
+
+
+<meta name="keywords" content="c#, .net core, programming" />
+
+<meta property="og:title" content="Typesafe SQL - Part 1" />
+<meta property="og:description" content="SQL is like a universal skill you aquire once and can use anywhere you work with when storing data. In whatever environment I&rsquo;m in, whichever programming language I&rsquo;m using, it is still the same.
+There are plenty of libraries and frameworks out there to integrate it in your favorite language. Also they follow usually one of two styles:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2022-09-24-typesafe-sql-part-1/" />
+<meta property="og:image" content="/img/avatar.jpg"/>
+<meta property="article:published_time" content="2022-09-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-24T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/img/avatar.jpg"/>
+
+<meta name="twitter:title" content="Typesafe SQL - Part 1"/>
+<meta name="twitter:description" content="SQL is like a universal skill you aquire once and can use anywhere you work with when storing data. In whatever environment I&rsquo;m in, whichever programming language I&rsquo;m using, it is still the same.
+There are plenty of libraries and frameworks out there to integrate it in your favorite language. Also they follow usually one of two styles:"/>
+
+
+<link rel="stylesheet" href="/assets/css/normalize.css" />
+<link rel="stylesheet" href="/assets/css/skeleton.css" />
+<link rel="stylesheet" href="/assets/css/blog.css" />
+<link rel="stylesheet" href="/assets/css/font-awesome/css/all.min.css" def />
+
+
+
+
+</head>
+
+<body>
+    <header>
+    <nav>
+        <div class="header container">
+            <div class="twelve columns">
+                <h1 class="title">
+                    <a class="title-main" href="/">A. Schollwöck&#39;s Blog</a>
+                </h1>
+                
+            
+                <ul class="title title-nav">
+                    
+                    <li>
+                        <a class="title-main-nav" href="/">Blog</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="title-main-nav" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <div class="container">
+
+            
+<article>
+    
+    <div class="post-item post-title">
+        
+        Typesafe SQL - Part 1
+    </div>
+    
+    <div class="post-item post-meta">
+        <span>
+    
+    
+    <i class="fas fa-calendar-alt"></i>&nbsp;Sep 24, 2022
+</span>
+
+    <span>
+        <i class="fas fa-inbox"></i>&nbsp;2952 words
+    </span>
+
+
+    <span>
+        <i class="far fa-clock"></i>&nbsp;14 minutes 
+    </span>
+
+<span>
+    
+    <i class="fas fa-tags"></i>
+    
+        
+        
+            <a href="/tags/c">c#</a>&nbsp;
+        
+            <a href="/tags/.net-core">.net core</a>&nbsp;
+        
+            <a href="/tags/programming">programming</a>&nbsp;
+        
+    
+</span>
+    </div>
+    
+    
+    
+
+    
+    <div class="post-content markdown-body">
+        <p>SQL is like a universal skill you aquire once and can use anywhere you work with when storing data.
+In whatever environment I&rsquo;m in, whichever programming language I&rsquo;m using, it is still the same.</p>
+<p>There are plenty of libraries and frameworks out there to integrate it in your favorite language.
+Also they follow usually one of two styles:</p>
+<ul>
+<li>Full abstraction in form of a full ORM</li>
+<li>Partial abstraction in form of a micro ORM</li>
+<li>Raw in form of hand written SQL</li>
+</ul>
+<p>Each has their individual pros and cons in one form or another.</p>
+<p>Full ORMs come with an optionated approach you have to follow and are limited to but usually are enough for most of the CRUD apps out there.
+But they can not provide the same functionality as raw SQL. In case you need more complex queries you usally resort to hand written SQL.
+In .NET world the most common full ORM is Entity Framework.</p>
+<p>They include</p>
+<ul>
+<li>Connection handling &amp; database driver</li>
+<li>Object mapping</li>
+<li>Types safe querying and executions</li>
+<li>Mitigating attack vectors (Prepare statement), e.g. Escpaing / SQL injection</li>
+<li>Optionated models</li>
+<li>Additional overhead (performance decrease)</li>
+<li>Database scheme migrations</li>
+</ul>
+<p>For hand written SQL I as a programmer have to take care of a lot more details. The most basic ones are mapping the results of a query to a structure I can further use and making sure that no attacks from untrusted input are possible, mostly known as SQL injections and so on. Usually standard libraries are used for</p>
+<ul>
+<li>Connection handling &amp; database driver</li>
+<li>Pure performance</li>
+<li>Sometimes mitigating attack vectors (Prepare statement), e.g. Escpaing / SQL injection</li>
+</ul>
+<p>Micro ORMs aim for the sweet spot of both of those. They don&rsquo;t have an optionated view on how something is done, provide mapping of results to an structure which is useable and mitigates attack vectors.</p>
+<ul>
+<li>Connection handling or utilizing default connection handling &amp; database driver</li>
+<li>Object mapping</li>
+<li>Mitigating attack vectors (Prepare statement), e.g. Escpaing / SQL injection</li>
+</ul>
+<p>Personnally I like full ORMs when looking at for example Django. It&rsquo;s very powerful and usually easy to set up and works out of the box. Nonetheless I had issues with the setup of Entity Framework when there is already a database existing and integrating it to a existing project. Many hours spent to check for error messages which should not have appeared&hellip; I guess partly my fault for doing something wrong. But that is exactly the point - when I had used a micro ORM or hand written SQL I would have been definitly more productive because of my previous experiences.</p>
+<p>Hand written SQL without sanity is dangerous. Sometimes I like dangerous but not in this context. Mitigating those dangers is definitly possible but I don&rsquo;t trust doing that myself. There are too much hurdles and corner cases I might miss. Usually there are helpers available in the form of &ldquo;Prepared statements&rdquo; for example. But using them requires definitly more lines of codes and are then again more abstract not standard SQL.</p>
+<p>As you might have guessed I prefer micro ORMs. They provide me with sanity, are usually quick to setup and don&rsquo;t get in my way when I want to things my way because I feel thats in a given context the best solution. Also they only add very little overhead to each statement I throw at a database.
+When talking about C# I prefer Dapper - it&rsquo;s perfect in doing what it does. It also has it&rsquo;s little quirks (e.g. query results of a couple of differenct classes/objects) but it&rsquo;s manageable and from a cost-benefit relation a good compromise.</p>
+<p>Nonetheless I miss specifically one feature I want and like in compiled, typed languages: type checking.</p>
+<p>That&rsquo;s why I will try to add this in an extra library which can be used. It&rsquo;s goals are:</p>
+<ul>
+<li><strong>(Goal)</strong> Native SQL experience (writing SQL statements)</li>
+<li><strong>(Goal)</strong> Type safe queries and executions</li>
+<li><strong>(Goal)</strong> Zero-cost abstractions</li>
+<li><strong>(Goal)</strong> No performance penalties</li>
+<li><strong>(Goal)</strong> Easy and transparent user experience</li>
+<li><strong>(Goal)</strong> Support most common databases (SQLite, PostgreSQL, MSSQL, Oracle, MySql, MariaDB)</li>
+</ul>
+<p>Let&rsquo;s see what we can fulfill and where we have to draw the line to not create another full ORM.
+Instead we aim for a sweet spot between micro ORMs and full ORMs.</p>
+<p>Ideally we don&rsquo;t care about any of that ORM stuff mentioned before. What we care is that we are able craft valid and safe SQL statements.
+Whatever libraries or frameworks you use - meaning you could even use it in full fledged ORMs when you need to resort to manual SQL statements again because of whatever reason (e.g. complexity).</p>
+<p>Out of scope is definetly:</p>
+<ul>
+<li>Connection handling &amp; database driver</li>
+<li>Database scheme migrations
+We only care about SQL. There are enough and very good libraries out there - mostly from official sources. We don&rsquo;t want to touch that.</li>
+</ul>
+<p>As you can imagin I was looking for something like this already on &ldquo;the market&rdquo;. But to be honest I couldn&rsquo;t find anyting like it in .NET world, neither on Nuget nor on Github (totally possible I missed something).
+But&hellip; I found something in Java world: <a href="https://www.jooq.org" target="_blank">jOOQ</a>.</p>
+<p>This seemed exactly what I was looking for. You are able to write abstracted SQL with type safety and it&rsquo;s really easy to use. You need to take care of some stuff like Code Generation to make type checking possible but hey&hellip; somewhere the information for our compilers need to come from and it seems a reasonable approach.
+What I did (and do) not like is the added performance overhead but jooq does querying and executing all by itself so there might not be too much overhead involved. To be honest I did not thoroughly check it as I am more of a .NET kid.</p>
+<p>So the journey began to look for something similar in .NET. I found <a href="https://sourceforge.net/projects/cooq/" target="_blank">cooq</a> but it seems abandoned and also not 100% what I&rsquo;m looking for even so it was like 90% there.
+Then there is also a reference to <a href="https://github.com/EndsOfTheEarth/Typed-Query" target="_blank">Typed Query</a> - this is incredible! Exactly what I was looking for !
+I thought&hellip; and realised it still does not fulfill my desire for full type checked SQL.
+Let&rsquo;s not sound too pesimstic - I got to now lots of important and very good information. I can learn a lot and use it wisely.</p>
+<p>In the end I decided to create such a library myself with the knowledge I got from jOOQ and Typed Query.
+Use principles from Typed Query and jOOQ, meaning:
+We need some kind of code generation and method chaining as we know it from functional programming and thus Linq.</p>
+<p>I&rsquo;m trying to make it work like this:</p>
+<pre><code class="language-C#">Select(Tbl_Cards.Id(), Tbl_Cards.Name(), Tbl_Cards.Form().As(&quot;colA&quot;))
+.From&lt;Tbl_Cards&gt;()
+.Where(Tbl_Cards.Id().Greater(10))
+.OrderBy(Tbl_Cards.Id())
+.Limit(50)
+</code></pre>
+<p>To get a corresponding SQL string:</p>
+<pre><code class="language-SQL">SELECT id, name, form AS colA
+FROM cards
+WHERE id &gt; @0
+ORDER BY id
+LIMIT @1
+</code></pre>
+<p>I still want to use Dapper as it does a fantastic job. We only need to provide input for Dapper or provide an additional abstraction layer.</p>
+<p>One of our goals is also &ldquo;zero-cost abstractions&rdquo;&hellip; let&rsquo;s see if we can do this somehow with new source generation of .NET 5.
+We might can get rid of method chaining and thus additional overhead by replacing the method chaining during compile time with a static string.
+Then we would have the same behaviour as we would use Dapper only.</p>
+<p>This might look then like this:</p>
+<figure>
+    <div class="mermaid">
+        
+graph TD;
+    
+    C["Code generated database schema"] --> T["Type safe SQL writing in C#"]
+    T --> G["Generate SQL string during compilation"]
+    G --> R["Results in SQL and parameters"]
+    R --> I["Input for and execution with Dapper"]
+    I --> D["Dapper provided objects"]
+    
+
+    </div>
+    <figcaption>
+        <em>Type safe SQL flow</em>
+    </figcaption>
+</figure>
+<p>It might be possible in the future to do something similar as Typed Query and jOOQ to directly execute our &ldquo;method chains&rdquo; against a database.
+But that&rsquo;s very far in the future and this is not something desirable - it&rsquo;s hard.
+A better approach would be to use Dapper under the hood and just call it&rsquo;s extension methods with own extension methods.</p>
+<figure>
+    <div class="mermaid">
+        
+graph LR;
+    
+        T["Type safe SQL methods in C#"] --> D["Dapper provided objects"];
+    
+
+    </div>
+    <figcaption>
+        <em>Future type safe SQL flow</em>
+    </figcaption>
+</figure>
+<p>But let&rsquo;s not get ahead of ourselves, one step at a time - first start with our foundation, meaning: SQL and parameters.</p>
+<h2 id="sql-dialects">SQL dialects</h2>
+<p>To make things more compliacted: there are multiple SQL dialects out there - perfect.
+Ideally we want to support the most common SQL dialects out there and if there is a new one it should be easy to integrate it as well.
+Isn&rsquo;t there a &ldquo;standard&rdquo; for it&hellip; ? Ah, yeah, right there is one.</p>
+<p>Don&rsquo;t get me started on those standards.</p>
+<p>So we will pick a database which we use to start of which also has a good documentation on it&rsquo;s syntax.
+You might have guessed it: Either PostgreSQL or SQLite.
+Not bad, we choose SQLite.</p>
+<p>Why? Because it&rsquo;s easy to setup and I like it - most applications/websites do not need more than SQLite.
+It also has great documentation and we do even get some nice flow diagrams of SQL with abstractions and hints for code reusage !
+I&rsquo;m still amazed what is possible with a file system and some well written code - unbelivable, really, I mean it.</p>
+<ul>
+<li><strong>(Requirement)</strong> Support as a first step SQLite</li>
+</ul>
+<p>Next issue is data types&hellip; oh man. This is something I don&rsquo;t like about SQLite. Why not do it like others&hellip; even if you don&rsquo;t want to but please&hellip; at least Date and Time data types 👀🤔. Date and Time is hard to get right&hellip; so I would have really preferred defaults.
+Well not something we can change now, let&rsquo;s make the best out of it and do it like other providers&hellip; with a bit of configurable magic.</p>
+<p>In the end we need to map types to what we have available in C#. Because we have less data types available in C# we need to do a 1:n mapping. In case of SQLite this should be fine but in for other SQL dialects such as PostgreSQL we might need to think about how to type check also for example floating points.</p>
+<ul>
+<li><strong>(Requirement)</strong> Create mapping from database data types to common C# data types</li>
+</ul>
+<h2 id="opinons-and-configuration">Opinons and configuration</h2>
+<p>This section is more like a coding practice I follow (and nothing new at all)&hellip; I might make this a separate post&hellip;</p>
+<p>You might have guessed it by reading until know - I&rsquo;m not really a fan of optionated code. There is a fine line of bringing in enough opinions to make it work and to overdo it. Not everyone shares the same opinion on whatever topic - thats life. So keep them out where ever possible.
+In code you can use optionated defaults but they should be configurable when possible. Obviously there are design decisions, etc. where it&rsquo;s simply not possible to do so.</p>
+<p>Let&rsquo;s take an example of code generation. Obviously the way classes are generated needs to be fixed somehow, else your logic might not work anymore. But for example class names can be variable. When we are generating a class for a table it shouldn&rsquo;t and can&rsquo;t matter if it is called &ldquo;Table_<classname>&rdquo; or &ldquo;Tbl_<classname>&rdquo; or &ldquo;<classname>&rdquo; - with limiations that it cannot conflict with other class names in a given name space, key words, etc.
+Why you ask? Because there are things like linters, code guidelines, etc. which vary a lot.</p>
+<p>As a general thumb of rule:</p>
+<ul>
+<li>Don&rsquo;t use magic in your code (fixed strings, numbers, etc.)</li>
+<li>Make it configurable (and thus transparent)</li>
+<li>Provide optionated defaults (best practice, etc.) for simplicity</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<p>Even if we talk a lot about &ldquo;move fast and break things&rdquo; (I didn&rsquo;t and don&rsquo;t like this statement at all - it&rsquo;s against everything we should do as engineers full stop.) or just simply &ldquo;shipping features&rdquo; there is one thing which might not appear in a requirement catalog but is always present: Performance.
+Not once in my entire life there was an application where performance was not important. There are different minimum and maximum requirements for everything but once it&rsquo;s breached, performance matters. It has always been like this and it will always be.</p>
+<p>I don&rsquo;t care what managers of companies say - performance has direct impact on user experience.
+It decides if something we built is pleasent to use. And that should be the ultimate goal.
+You can give me a software where I only have to do 1 click to get my desired result in 10 seconds or a software where I have to click 3 times and get my result in 5 seconds. I will always choose 5 seconds over 10 seconds (maybe because we can automate those 3 clicks to 1 as well by ourselves 😂).
+Those 5 seconds will feel and will be more productive than 10 seconds.</p>
+<p>Because performance is based on multiple levels (we don&rsquo;t usually write machine code in C#, right) we need to take care on each level we add.
+This should also be the case for what we will be doing.
+Of course what we want is correctness (incorrectness may be worse than performance because you can&rsquo;t get something done) but we should always also look at performance. Rust is a perfect example for this in my book with their zero-cost abstractions - brilliant ideas made reality.</p>
+<p>Obviously it might come at costs of added complexity but as always we need to find the sweet spot - that&rsquo;s life. Nothing is perfect and we always need to wage what is best in which situation. Rust took the approach to make their language more complex to reach their goals of correctness which in the end results in more productivity because of less errors in whatever level even if it costs us engineers more.</p>
+<p>Anyway, our goal is the same as in Rust: &ldquo;zero-cost abstractions&rdquo;. We will check for this with:</p>
+<ul>
+<li><strong>(Requirement)</strong> <a href="https://benchmarkdotnet.org" target="_blank">Benchmarks</a> against hand written SQL (ideally it&rsquo;s the same because we also generate static strings)</li>
+</ul>
+<p>What we can&rsquo;t measure is how often someone rewrites their incorrect static SQL statements 😉</p>
+<h2 id="code-generation">Code generation</h2>
+<p>Somehow we need to represent a database scheme in a way our compiler can work with.</p>
+<p>For this we are going to use code generation to create classes, methods, properties, etc. to create a correct representation. This will be the basis for the whole functionality we are going to provide.</p>
+<p>We need to make sure that code generation is easy to use and you <strong>can&rsquo;t break</strong> things easily.</p>
+<ul>
+<li><strong>(Requirement)</strong> Code generation has to be error prone and transparent in what it is doing.</li>
+</ul>
+<p>Wether it is</p>
+<ul>
+<li>reading a database scheme,</li>
+<li>creating classes,</li>
+<li>removing classes or</li>
+<li>throwing errors</li>
+</ul>
+<p>Removing classes might also occur because of a removed table. We need to make sure that even this case is supported and we don&rsquo;t leave any artifacts behind which do not even exist anymore. Without considering this use case it can easily break one of our goals to provide type checking - when the type should not exist anymore.</p>
+<p>Changes or extensions to database schemes are basically happening daily. So we need to consider that the code generation for the same database is also used daily. Code generation needs to work as only with updated classes the compiler recognizes that tables, types, etc. changed and we might need to adjust our codebase.
+This is one of our goals.</p>
+<p>This also means that not only the results of code generation are usually part of some kind of source control but also the input should be part of it.
+Else we might not be able to recreate code in the same manner as in an earlier point of time. This will result in an additional requirement:</p>
+<ul>
+<li><strong>(Requirement)</strong> Make input (configurations) for code generation available in a controlled way (e.g. configuration file)</li>
+</ul>
+<h2 id="dynamic-sql">Dynamic SQL</h2>
+<p>Not everything we can do in SQL needs to be present in a database scheme. Still, we should try our best to also support those scenarios.
+For example it is really easy with &ldquo;VALUES&rdquo; statements or &ldquo;WITH&rdquo; table expressions to create tables on the fly for one specific statement. We should definetly provide solutions for those scenarios as well.</p>
+<p>In those scenarios code generation does not help at all. It might be necessary that in order to get type checking, hand written classes are necessary.</p>
+<ul>
+<li><strong>(Requirement)</strong> Allow usage of hand written classes when code generation is not possible</li>
+</ul>
+<h2 id="classes-and-method-chaining">Classes and method chaining</h2>
+<p>In order to provide type safe SQL we need classes and methods for easily creating SQL statements.
+Basically for every key word there needs to exist a class and most likely multiple methods to provide method chaining.
+Then we also need to consider different SQL dialects, some have additional specific key words which integrate to existing keywords.</p>
+<p>This will result in a lot of classes and methods to be created possibly for each SQL dialect. Resulting in possibly times N the number of classes (where N = Number of supported SQL dialects) - doing so by hand is where most of the work is.</p>
+<p>It might be worth looking into a kind of meta language which is then used for code generation for the type safe SQL library itself.
+There should reside the logic which classes and which methods with which parameters to create.
+This will make it easy to enter new keywords and define how the method chaining should look like.
+There can then also different SQL dialects be supported easily.
+Usually every SQL dialect has flow charts and documentation in which it is clearly visible what keywords are necessary and how they can be combined with each other.</p>
+<ul>
+<li><strong>(Requirement)</strong> Generate type safe SQL classes and methods with meta language</li>
+</ul>
+<p>This is it for now&hellip; more to come in the next parts of the series.</p>
+<script async src="/assets/js/mermaid.min.js"></script>
+    </div>
+</article>
+
+
+
+
+
+        </div>
+    </main>
+
+    <div class="container">
+        <div class="footer">
+            <footer>
+    
+
+
+    
+    <div class="social">
+        <a title="Check my code" href="https://github.com/QualmandDriven">
+            <i class="fab fa-github"></i>
+        </a>
+        <a title="Follow me" href="https://www.xing.com/profile/Alexander_Schollwoeck">
+            <i class="fab fa-xing"></i>
+        </a>
+        <a title="Mail me" href="mailto:alexander@schollwoeck.de">
+            <i class="fas fa-envelope"></i>
+        </a>
+
+        <a title="RSS" href="/posts/index.xml">
+            <i class="fas fa-rss"></i>
+        </a>
+    
+        <div class="copyright">
+            
+            <span>&copy; 2022, A. Schollwöck
+            </span>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+</body>
+</html>

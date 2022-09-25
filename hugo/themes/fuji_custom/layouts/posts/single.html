@@ -39,6 +39,12 @@
                target="_blank">{{ .Site.Params.license }}</a>{{ i18n "postCopyrightEnd" }}</p>
     </blockquote>
 </div>
+
+{{ if (.Params.diagrams) }}
+<!-- MermaidJS support -->
+<script async src="/assets/js/mermaid.min.js"></script>
+{{ end }}
+
 {{ end }}
 {{ if and (.Site.Params.disqusJSApi) (ne .Params.showComments false) }}
 {{ partial "comment-disqusjs.html" . }}

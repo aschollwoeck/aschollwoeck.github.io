@@ -31,6 +31,12 @@
         {{ .Content }}
     </div>
 </article>
+
+{{ if (.Params.diagrams) }}
+<!-- MermaidJS support -->
+<script async src="/assets/js/mermaid.min.js"></script>
+{{ end }}
+
 <!-- post license -->
 {{ if and (or .Site.Params.showLicense .Params.showLicense) (ne .Params.showLicense false) }}
 <div class="license markdown-body">
